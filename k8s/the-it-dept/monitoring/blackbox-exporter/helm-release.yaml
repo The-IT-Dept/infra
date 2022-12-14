@@ -6,8 +6,6 @@ metadata:
   namespace: monitoring
 spec:
   interval: 5m
-  dependsOn:
-    - name: kube-prometheus-stack
   chart:
     spec:
       version: "7.1.3"

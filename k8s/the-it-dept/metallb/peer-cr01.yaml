@@ -1,0 +1,14 @@
+---
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: peer-cr01
+  namespace: metallb-system
+spec:
+  myASN: 64512
+  nodeSelectors:
+    - matchLabels:
+        externallb: 'yes'
+  peerASN: 64512
+  peerAddress: 100.64.0.1
+  peerPort: 179
