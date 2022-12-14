@@ -1,0 +1,147 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      version: "43.x"
+      chart: kube-prometheus-stack
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community-charts
+        namespace: flux-system
+      interval: 60m
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    alertmanager:
+      enabled: false
+
+    grafana:
+      adminPassword: ${SECRET_GRAFANA_ADMIN_PASSWORD}
+      ingress:
+        enabled: true
+        path: "/"
+        annotations:
+          kubernetes.io/ingress.class: traefik
+          cert-manager.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - &domain grafana.infra.${CONFIG_INFRA_DOMAIN}
+        tls:
+          - secretName: *domain
+            hosts:
+              - *domain
+
+    kubelet:
+      enabled: true
+      serviceMonitor:
+        metricRelabelings:
+          - action: replace
+            sourceLabels:
+              - node
+            targetLabel: instance
+
+    prometheus:
+      prometheusSpec:
+        securityContext:
+          runAsGroup: 0
+          runAsNonRoot: false
+          runAsUser: 0
+          fsGroup: 0
+        replicas: 3
+        replicaExternalLabelName: __replica__
+        externalLabels:
+          cluster: home-ops
+        thanos:
+          # renovate: datasource=docker depName=quay.io/thanos/thanos
+          image: quay.io/thanos/thanos:v0.29.0
+          version: "v0.29.0"
+        podAntiAffinity: hard
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        retention: 14d
+        retentionSize: 45GB
+        enableAdminAPI: true
+        walCompression: true
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: ${CONFIG_STORAGE_CLASS}
+              resources:
+                requests:
+                  storage: 50Gi
+        resources:
+          requests:
+            cpu: 10m
+            memory: 2000Mi
+          limits:
+            memory: 8000Mi
+        additionalScrapeConfigs:
+          - job_name: pve
+            scrape_interval: 1m
+            scrape_timeout: 30s
+            honor_timestamps: true
+            metrics_path: /pve
+            static_configs:
+              - targets:
+                  - "172.24.0.1:9221"
+          - job_name: blackbox
+            metrics_path: /probe
+            params:
+              module:
+                - http_2xx
+            static_configs:
+              - targets:
+                  - https://google.com
+            relabel_configs:
+              - source_labels:
+                  - __address__
+                target_label: __param_target
+              - source_labels:
+                  - __param_target
+                target_label: target
+              - target_label: __address__
+                replacement: blackbox-exporter-prometheus-blackbox-exporter.monitoring:9115
+          - job_name: 'snmp_arista'
+            static_configs:
+              - targets:
+                  - 172.16.255.1
+                  - 172.16.255.2
+            metrics_path: /snmp
+            params:
+              module:
+                - arista_sw
+            relabel_configs:
+              - source_labels:
+                  - __address__
+                target_label: __param_target
+              - source_labels:
+                  - __param_target
+                target_label: instance
+              - target_label: __address__
+                replacement: snmp-exporter-prometheus-snmp-exporter:9116
+          - job_name: 'snmp_mikrotik'
+            static_configs:
+              - targets:
+                  - 172.16.255.3
+            metrics_path: /snmp
+            params:
+              module:
+                - mikrotik
+            relabel_configs:
+              - source_labels:
+                  - __address__
+                target_label: __param_target
+              - source_labels:
+                  - __param_target
+                target_label: instance
+              - target_label: __address__
+                replacement: snmp-exporter-prometheus-snmp-exporter:9116

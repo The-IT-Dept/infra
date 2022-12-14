@@ -4,4 +4,6 @@ kind: ConfigMap
 metadata:
   namespace: flux-system
   name: cluster-config
-data: {}
+data:
+  CONFIG_INFRA_DOMAIN: "theitdept.au"
+  CONFIG_STORAGE_CLASS: "zfs"
