@@ -2,7 +2,7 @@
 apiVersion: metallb.io/v1beta2
 kind: BGPPeer
 metadata:
-  name: peer-cr01
+  name: peer-cr02
   namespace: metallb-system
 spec:
   myASN: 64512
