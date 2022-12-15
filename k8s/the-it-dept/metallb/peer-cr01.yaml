@@ -10,5 +10,5 @@ spec:
     - matchLabels:
         externallb: 'yes'
   peerASN: 64512
-  peerAddress: 100.64.0.1
+  peerAddress: ${CONFIG_CR01_BGP_PEER_ADDRESS}
   peerPort: 179
