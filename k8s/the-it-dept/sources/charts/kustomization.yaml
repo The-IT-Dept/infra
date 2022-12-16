@@ -18,3 +18,4 @@ resources:
   - common.yaml
   - vouch.yaml
   - kongz.yaml
+  - traefik-charts.yaml

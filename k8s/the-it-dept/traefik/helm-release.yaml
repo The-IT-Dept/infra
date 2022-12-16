@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik-v2
+spec:
+  releaseName: traefik
+  chart:
+    spec:
+      chart: traefik
+      version: 20.8.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+  interval: 5m
+
+  values:
+    deployment:
+      replicas: 5
+
+    forwardedHeaders:
+      enabled: true
+      trustedIPs:
+        - 10.0.0.0/8
+
+    nodeSelector:
+      externallb: "yes"
+
+    service:
+      spec:
+        externalTrafficPolicy: Local
+        loadBalancerIP: ${SECRET_INGRESS_PUBLIC_IPV4}
+
+    ssl:
+      enabled: true
+      permanentRedirect: true
