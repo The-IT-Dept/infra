@@ -100,7 +100,15 @@ spec:
                 - http_2xx
             static_configs:
               - targets:
-                  - https://google.com
+                  - https://google.com.au
+                  - https://npratley.net
+                  - https://rfspager.app
+                  - https://rfspager.com
+                  - https://serversaustralia.com.au
+                  - https://tillyandmilly.au
+                  - https://kaelascreations.com.au
+                  - https://idontgiveastitch.com.au
+                  - https://theitdept.au
             relabel_configs:
               - source_labels:
                   - __address__
