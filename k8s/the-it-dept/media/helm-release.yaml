@@ -18,6 +18,9 @@ spec:
 
   values:
     general:
+      nodeSelector:
+        externallb: "yes"
+
       ingress_host: media-admin.theitdept.au
       overseerr_ingress_host: requests.theitdept.au
       plex_ingress_host: plex.theitdept.au
@@ -31,10 +34,6 @@ spec:
             readOnly: false
 
     plex:
-      container:
-        nodeSelector:
-          externallb: "yes"
-
       image:
         repository: plexinc/pms-docker
         tag: 1.29.2.6364-6d72b0cf6
