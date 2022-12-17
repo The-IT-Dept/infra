@@ -12,6 +12,7 @@ configMapGenerator:
       - dashboards/logs.json
       - dashboards/blackbox.json
       - dashboards/proxmox.json
+      - dashboards/snmp-stats_rev1.json
     options:
       labels:
         grafana_dashboard: "1"
