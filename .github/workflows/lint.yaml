@@ -1,34 +1,37 @@
 ---
-name: Lint
+name: "Lint"
 
-on: # yamllint disable-line rule:truthy
+on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 
-env:
-  # Currently no way to detect automatically
-  DEFAULT_BRANCH: main
-
 jobs:
-  build:
-    name: MegaLinter
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
         with:
           fetch-depth: 0
 
+      - name: Generate Token
+        uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # renovate: tag=v1.7.0
+        id: generate-token
+        with:
+          app_id: "${{ secrets.BOT_APP_ID }}"
+          private_key: "${{ secrets.BOT_APP_PRIVATE_KEY }}"
+
       - name: MegaLinter
-        uses: oxsecurity/megalinter@v6.15.0
+        uses: oxsecurity/megalinter@d8612e7786f5c64747a73759d8bc459224a00fe9 # v6.15.0
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
+          PRINT_ALPACA: false
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'workflow_dispatch' }}
           ENABLE_LINTERS: |-
             ${{
@@ -37,25 +40,12 @@ jobs:
                   [
                     "ACTION_ACTIONLINT",
                     "ANSIBLE_ANSIBLE_LINT",
-                    "COPYPASTE_JSCPD",
-                    "KUBERNETES_KUBEVAL",
-                    "MARKDOWN_MARKDOWNLINT",
                     "REPOSITORY_GIT_DIFF",
                     "REPOSITORY_SECRETLINT",
                     "TERRAFORM_TERRAFORM_FMT",
-                    "YAML_PRETTIER",
-                    "YAML_YAMLLINT"
                   ]
                 '),
                 ','
               )
             }}
-          ANSIBLE_DIRECTORY: provision/ansible
-          ANSIBLE_ANSIBLE_LINT_CONFIG_FILE: .github/linters/.ansible-lint
-          KUBERNETES_DIRECTORY: k8s
-          KUBERNETES_KUBEVAL_ARGUMENTS: --ignore-missing-schemas
-          MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .github/linters/.markdownlint.yaml
-          MARKDOWN_MARKDOWNLINT_RULES_PATH: .github/
-          YAML_YAMLLINT_CONFIG_FILE: .github/linters/.yamllint.yaml
-          YAML_PRETTIER_CONFIG_FILE: .github/linters/.prettierrc.yaml
-          YAML_PRETTIER_FILTER_REGEX_EXCLUDE: "(.*\\.sops\\.ya?ml)"
+          ANSIBLE_DIRECTORY: ansible
