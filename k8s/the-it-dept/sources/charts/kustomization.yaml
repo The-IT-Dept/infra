@@ -12,6 +12,7 @@ resources:
   - prometheus-community-charts.yaml
   - t3n.yaml
   - puppet.yaml
+  - kyverno-charts.yaml
   - minio.yaml
   - nicko170.yaml
   - ingress-nginx-charts.yaml
