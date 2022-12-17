@@ -19,3 +19,4 @@ resources:
   - vouch.yaml
   - kongz.yaml
   - traefik-charts.yaml
+  - kube-media.yaml

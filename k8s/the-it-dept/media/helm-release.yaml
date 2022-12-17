@@ -1,0 +1,94 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: media
+  namespace: media
+spec:
+  releaseName: media
+  chart:
+    spec:
+      chart: kube-media
+      version: 0.2.1
+      sourceRef:
+        kind: HelmRepository
+        name: kube-media
+        namespace: flux-system
+  interval: 5m
+
+  values:
+    general:
+      ingress_host: media-admin.theitdept.au
+      overseerr_ingress_host: requests.theitdept.au
+      plex_ingress_host: plex.theitdept.au
+
+      storage:
+        customVolume: true
+        volumes:
+          nfs:
+            server: ${CONFIG_NFS_SERVER}
+            path: /volume1/Media
+            readOnly: false
+
+    plex:
+      container:
+        nodeSelector:
+          externallb: "yes"
+
+      image:
+        repository: plexinc/pms-docker
+        tag: 1.29.2.6364-6d72b0cf6
+        pullPolicy: IfNotPresent
+      enabled: true
+
+      config:
+        PLEX_CLAIM: claim-mPEsyg2FcJBs-2WgDxvd
+        ALLOWED_NETWORKS: "10.42.0.0/16"
+
+      ingress:
+        tls:
+          enabled: true
+          secretName: theitdept-cloudflare
+        annotations: &baseAnnotations
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+
+      extraVolumes:
+        - name: riptide-vol-media-01
+          nfs:
+            server: 100.69.2.2
+            path: /vol_media_01
+            readOnly: true
+
+      extraMounts:
+        - name: riptide-vol-media-01
+          mountPath: /mnt/riptide_vol_media_01
+          readOnly: true
+
+      kubePlex:
+        enabled: false
+        mounts: /transcode,/media,/mnt/riptide_vol_media_01
+
+    overseerr:
+      enabled: true
+      ingress:
+        tls:
+          enabled: true
+          secretName: theitdept-cloudflare
+        annotations: *baseAnnotations
+
+    service: &service
+      enabled: true
+      ingress:
+        annotations: *baseAnnotations
+        tls:
+          enabled: true
+          secretName: theitdept-cloudflare
+
+    sonarr: *service
+    lidarr: *service
+    radarr: *service
+    prowlarr: *service
+    sabnzbd: *service
+    #transmission: *service
+    tautulli: *service
