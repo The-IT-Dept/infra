@@ -14,6 +14,7 @@ configMapGenerator:
       - dashboards/proxmox.json
       - dashboards/snmp-stats_rev1.json
       - dashboards/tid-network.json
+
     options:
       labels:
         grafana_dashboard: "1"
