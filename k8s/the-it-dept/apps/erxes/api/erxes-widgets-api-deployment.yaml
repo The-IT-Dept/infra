@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: erxes-widgets-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: erxes-widgets-api
+  template:
+    metadata:
+      labels:
+        component: erxes-widgets-api
+    spec:
+      containers:
+        - name: erxes
+          image: erxes/erxes-widgets-api:0.9.17
+          ports:
+            - name: http
+              containerPort: 3100
+          envFrom:
+            - secretRef:
+                name: erxes-common-env
+            - configMapRef:
+                name: erxes-common-env
+            - configMapRef:
+                name: erxes-widgets-api-env
+          env:
+            - name: PORT
+              value: "3100"
+            - name: WIDGET_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: erxes-common
+                  key: ERXES_WIDGETS_URL

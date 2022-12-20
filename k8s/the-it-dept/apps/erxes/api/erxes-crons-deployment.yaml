@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: erxes-crons
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: erxes-crons
+  template:
+    metadata:
+      labels:
+        component: erxes-crons
+    spec:
+      containers:
+        - name: erxes
+          image: erxes/erxes-api:0.9.17
+          command: ["node", "--max_old_space_size=8192", "dist/cronJobs"]
+          ports:
+            - name: http
+              containerPort: 3600
+          envFrom:
+            - secretRef:
+                name: erxes-common-env
+            - configMapRef:
+                name: erxes-crons-env
+          env:
+            - name: PORT_CRONS
+              value: "3600"
