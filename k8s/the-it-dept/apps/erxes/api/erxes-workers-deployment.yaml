@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: erxes
-          image: erxes/erxes-api:0.9.17
+          image: erxes/erxes-api:1.0.1
           command: ["node", "--max_old_space_size=8192", "--experimental-worker", "dist/workers"]
           ports:
             - name: http

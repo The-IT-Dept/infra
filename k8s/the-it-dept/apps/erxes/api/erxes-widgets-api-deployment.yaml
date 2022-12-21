@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: erxes
-          image: erxes/erxes-widgets-api:0.9.17
+          image: erxes/erxes-widgets-api:1.0.1
           ports:
             - name: http
               containerPort: 3100
