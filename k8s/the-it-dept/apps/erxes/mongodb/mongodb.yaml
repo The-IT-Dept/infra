@@ -47,7 +47,7 @@ spec:
               value: "no"
             - name: MONGODB_ENABLE_IPV6
               value: "yes"
-          image: mongo:3.4.3
+          image: mongo:3.7.9
           imagePullPolicy: Always
           livenessProbe:
             exec:
