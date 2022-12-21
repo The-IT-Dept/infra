@@ -157,7 +157,7 @@ spec:
                 secretKeyRef:
                   key: redis-password
                   name: redis
-          image: docker.io/bitnami/redis:4.0.13
+          image: docker.io/bitnami/redis:4.0.14
           imagePullPolicy: Always
           livenessProbe:
             exec:
@@ -255,7 +255,7 @@ spec:
                   name: redis
             - name: REDIS_PORT
               value: "6379"
-          image: docker.io/bitnami/redis:4.0.13
+          image: docker.io/bitnami/redis:4.0.14
           imagePullPolicy: Always
           livenessProbe:
             exec:
