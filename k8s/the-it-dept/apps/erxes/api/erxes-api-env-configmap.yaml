@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: erxes-api-env
+data:
+  DEBUG: "erxes-api:*"
+  NODE_ENV: production
+  PORT: "3300"
+  # non public urls
+  WIDGETS_API_DOMAIN: http://erxes-widgets-api
+  CRONS_API_DOMAIN: http://erxes-crons
+  WORKERS_API_DOMAIN: http://erxes-workers
+  # LOGS_API_DOMAIN: http://erxes-logger

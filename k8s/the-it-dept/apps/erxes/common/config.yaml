@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: erxes-common
+data:
+  ERXES_API_GRAPHQL_URL: http://${CONFIG_ERXES_HOST}/api/graphql
+  ERXES_API_SUBSCRIPTIONS_URL: ws://${CONFIG_ERXES_HOST}/api/subscriptions
+  ERXES_API_URL: http://${CONFIG_ERXES_HOST}/api
+  ERXES_INTEGRATIONS_URL: http://${CONFIG_ERXES_HOST}/integrations
+  ERXES_WEB_URL: http://${CONFIG_ERXES_HOST}
+  ERXES_WIDGETS_URL: http://${CONFIG_ERXES_HOST}/widgets

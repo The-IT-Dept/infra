@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: erxes-crons-env
+data:
+  DEBUG: "erxes-crons:*"
+  # MONGO_URL: # See secret
+  NODE_ENV: production
+  PROCESS_NAME: crons
