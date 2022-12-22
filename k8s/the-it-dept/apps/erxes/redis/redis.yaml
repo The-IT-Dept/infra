@@ -38,6 +38,8 @@ metadata:
   labels:
     app: redis
     release: redis
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
   name: redis-health
 ---
 apiVersion: v1
@@ -55,6 +57,8 @@ data:
     rename-command FLUSHALL ""
 kind: ConfigMap
 metadata:
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
   labels:
     app: redis
     release: redis
@@ -99,6 +103,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
   labels:
     app: redis
     release: redis
@@ -209,9 +215,11 @@ spec:
         - emptyDir: { }
           name: redis-data
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
   labels:
     app: redis
     release: redis
@@ -283,7 +291,6 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
-          resources: null
           securityContext:
             runAsUser: 1001
           volumeMounts:
@@ -291,7 +298,6 @@ spec:
               name: health
             - mountPath: /data
               name: redis-data
-              subPath: null
             - mountPath: /opt/bitnami/redis/etc
               name: config
       securityContext:
