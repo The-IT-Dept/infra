@@ -27,7 +27,7 @@ data:
   SCOUT_PREFIX: "lnau_"
 
   DB_CONNECTION: "mysql"
-  DB_HOST: "mysql"
+  DB_HOST: "ln-au-mysql"
   DB_PORT: "null"
   DB_DATABASE: "ln"
   DB_USERNAME: "ln"
@@ -38,7 +38,7 @@ data:
   SESSION_DRIVER: "database"
   QUEUE_DRIVER: "sync"
 
-  REDIS_HOST: "redis"
+  REDIS_HOST: "ln-au-redis-master"
   REDIS_PORT: "6379"
 
   MAIL_DRIVER: "smtp"
