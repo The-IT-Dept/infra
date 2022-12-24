@@ -5,4 +5,4 @@ metadata:
   name: nicko170-charts
 spec:
   interval: 30m
-  url: https://charts.nicko170.au/
+  url: http://charts.nicko170.au/
