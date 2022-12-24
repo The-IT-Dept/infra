@@ -19,8 +19,8 @@ spec:
   values:
     persistence:
       enabled: true
-      size: 25Gi
-      storageClass: ssd-gold
+      size: 100Gi
+      storageClass: zfs
 
     resources:
       requests:

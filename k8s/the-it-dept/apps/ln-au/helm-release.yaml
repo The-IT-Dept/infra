@@ -89,6 +89,7 @@ spec:
         persistence:
           enabled: true
           size: 25Gi
+          storageClass: zfs
 
       secondary:
         replicaCount: 0
