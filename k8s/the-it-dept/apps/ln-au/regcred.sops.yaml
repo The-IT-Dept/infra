@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: regcred
+    namespace: ln-au
+type: kubernetes.io/dockerconfigjson
+data:
+    .dockerconfigjson: ENC[AES256_GCM,data:KBfZFs7Bpktyl8dv+473q87g0jxkBGXaAX5UrghhW5nzH8ueMLihrsQ6cNRJAGlOHlc4oan8rQbqH3VoFTpBdvv/uTQ2eso0TX3CWUW2xl6TO5D6xqNmzxW3tQ2D5flP2681hjB5dNRyEcYD8fHbd/0niQ==,iv:Nc4KIdmof8/HNotMrQNRoIuc3PFW17seIWYF7VQkf3U=,tag:Qu9exBsvqgeGCvQYRrufxg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2022-12-24T10:48:19Z"
+    mac: ENC[AES256_GCM,data:8ZNsgkqnc0RU4Et4o/XoF5K6LEVpe8Y13FVXMtvgbii1uLcDW53KV/Jw9WOfFLXQUePe5en4oWeaudjp3t1juXp/3oaDQUUHKp+EKpIZkzDTRf/u7QyFatrXE2xTrdpIzfa5rdieYOfdEcYL20mtb7+veZHFQ+oglEsRxCMUBT8=,iv:/I6+A7ofIu+ZvlLZZUsHM4sXIJYHxQmgNoA8ooaaDSw=,tag:9++qH+4UtcExA8gRS0rpcA==,type:str]
+    pgp:
+        - created_at: "2022-12-24T10:48:18Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA+n1IkN6s1SvAQ//V8XXcDkBUOGf0yTrrBDYzYCrCUWE8rnlEO740yOyXUXH
+            3J1U3oHrnJX8wUOblBAH3M0rzDQcAIQIr5jgQOG+8+X4zI15qmqhrrB8fbc2tTlq
+            FjkFChkVUSB2knJ61GzvPUmwyUtqYNdm2BOICZjBhV+EzWQpJT1F4CD0hae4Lo8Y
+            0rLlosgq2dwKcMHsDW2KcU3l1GvJDeyxoN9ViqlQaRHtISIEJognbWCMR1dAtjbt
+            WmkaWR1nkXIs/AIcSbXCnYdLLlT3aQXe88NLg8fXiqT2CSGrjTBfJLWaWgCQ3iQ5
+            DfFxkNsz8SxXCwgTZsA1Ehs96a/AV/1HN4cQoBnqWeWv84h0NMN80CKOL/lxhsW0
+            Ba05D467Sp96mAozbIHlIeURjaATKBg5LceFKRAbInJn7irBZap1jX1gcAxPJf8m
+            unX3J1eFf45pXcSMd0IaGxXTfEZvQZPS8nrGzIcDxQtkDrjskeCADCVjjoJA3sHJ
+            wSVoWCO9tRSuxfqpJp0Q15sGiF+xfZmUIrJZoFBnW0T3dQYAJSHUeb8biqYeoaAx
+            lohWp8Ii7NxdhsTSkhOS7qr6RP9xvnMWN8nvybXQoUL/jKaz+aBdvpF9x5r+dJLw
+            f4WlfwdzFWFHI6xpjRmg7nEIjEGNFkc21iLVMeRHS9D61Du1i5jYO9sHXXjiAI/U
+            aAEJAhAw1uF2+v7AfKGUc49dLl29M0yuf83HFiCbCzoL1x7pHW/uR2GDw3klt0u3
+            fCIv9pAlcs0rSbq4dcdAfw6XyZlq3eeeefs1E5BZcvAxIsPhlVwRAWD+XWWDHdJk
+            ohp3YmT4nYP+
+            =U5o2
+            -----END PGP MESSAGE-----
+          fp: 1DBC92C5001CDAE01E6A730CFC82278B6F8AA349
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.2

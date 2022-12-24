@@ -1,0 +1,59 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ln-config
+  namespace: ln-au
+data:
+  APP_NAME: "ln.au"
+  APP_ENV: "production"
+  APP_DEBUG: "true"
+  APP_LOG_LEVEL: "debug"
+  APP_LOCALE: "en"
+  APP_URL: "https://ln.au"
+  APP_VERSION: "3.0.1"
+  ENABLE_CUSTOM_DOMAINS: "true"
+  ENABLE_CONTACT_PAGE: "true"
+  BILLING_ENABLED: "true"
+  API_INTEGRATED: "true"
+  INSTALLED: "true"
+  APP_TIMEZONE: "Australia/Sydney"
+  DISABLE_UPDATE_AUTH: "false"
+  NOTIFICATIONS_ENABLED: "true"
+  WORKSPACES_ENABLED: "true"
+  NEW_WORKSPACE_FILTER: "true"
+  SCOUT_DRIVER: "mysql"
+  SCOUT_MYSQL_MODE: "extended"
+  SCOUT_PREFIX: "lnau_"
+
+  DB_CONNECTION: "mysql"
+  DB_HOST: "mysql"
+  DB_PORT: "null"
+  DB_DATABASE: "ln"
+  DB_USERNAME: "ln"
+  DB_PREFIX: "null"
+
+  BROADCAST_DRIVER: "log"
+  CACHE_DRIVER: "file"
+  SESSION_DRIVER: "database"
+  QUEUE_DRIVER: "sync"
+
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+
+  MAIL_DRIVER: "smtp"
+  MAIL_HOST: "postal.theitdept.au"
+  MAIL_PORT: "2999"
+  MAIL_USERNAME: "the-it-dept/ln-au"
+
+  MAIL_ENCRYPTION: "tls"
+
+  PUSHER_APP_ID: ""
+  PUSHER_APP_KEY: ""
+  PUSHER_APP_SECRET: ""
+
+  REMOTE_FILE_VISIBILITY: "private"
+  USE_PRESIGNED_S3_URLS: "true"
+  STATIC_FILE_DELIVERY: "null"
+  UPLOADS_DISK_DRIVER: "local"
+  PUBLIC_DISK_DRIVER: "local"
