@@ -31,7 +31,7 @@ spec:
       command: /cnb/process/web
 
     cron:
-      enabled: true
+      enabled: false
       command: /cnb/process/schedule
       schedule: "*/1 * * * *"
 
