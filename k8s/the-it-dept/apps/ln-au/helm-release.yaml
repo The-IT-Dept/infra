@@ -8,7 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://charts.nicko170.au/
+      # renovate: registryUrl=http://charts.nicko170.au/
       chart: laravel
       version: 0.1.0
       sourceRef:
