@@ -3,8 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - regcred.sops.yaml
-  - minio
-  - config.yaml
   - secrets.sops.yaml
+  - config.yaml
+  - minio
   - helm-release.yaml
-  - horizon-monitor.yaml
