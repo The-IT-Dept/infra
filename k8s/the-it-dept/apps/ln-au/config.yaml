@@ -28,10 +28,10 @@ data:
 
   DB_CONNECTION: "mysql"
   DB_HOST: "ln-au-mysql"
-  DB_PORT: "null"
+  DB_PORT: "3306"
   DB_DATABASE: "ln"
   DB_USERNAME: "ln"
-  DB_PREFIX: "null"
+  DB_PREFIX: ""
 
   BROADCAST_DRIVER: "log"
   CACHE_DRIVER: "file"
@@ -54,6 +54,6 @@ data:
 
   REMOTE_FILE_VISIBILITY: "private"
   USE_PRESIGNED_S3_URLS: "true"
-  STATIC_FILE_DELIVERY: "null"
+  STATIC_FILE_DELIVERY: ""
   UPLOADS_DISK_DRIVER: "local"
   PUBLIC_DISK_DRIVER: "local"
