@@ -41,6 +41,12 @@ spec:
         secretKey: "${SECRET_LNAU_MINIO_SECRET_KEY}"
         policy: readwrite
 
+    securityContext:
+      enabled: true
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+
     ingress:
       enabled: false
       annotations:
