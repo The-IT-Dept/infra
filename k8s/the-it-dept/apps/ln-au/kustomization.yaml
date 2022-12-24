@@ -5,6 +5,6 @@ resources:
   - regcred.sops.yaml
   - minio
   - config.yaml
-  - secrets.yaml
+  - secrets.sops.yaml
   - helm-release.yaml
   - horizon-monitor.yaml
