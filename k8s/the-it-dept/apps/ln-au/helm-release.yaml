@@ -70,6 +70,8 @@ spec:
 
     redis:
       enabled: true
+      global:
+        storageClass: zfs
 
     mysql:
       enabled: true
