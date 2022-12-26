@@ -68,7 +68,6 @@ spec:
 
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
-        ingress.kubernetes.io/ssl-redirect: "true"
 
     redis:
       enabled: true
