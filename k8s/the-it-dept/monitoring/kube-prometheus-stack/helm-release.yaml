@@ -83,7 +83,7 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         hosts:
           - &host "alert-manager.infra.${CONFIG_INFRA_DOMAIN}"
         tls:
@@ -107,7 +107,7 @@ spec:
         enabled: true
         path: "/"
         annotations:
-          kubernetes.io/ingress.class: traefik
+          kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - &domain grafana.infra.${CONFIG_INFRA_DOMAIN}

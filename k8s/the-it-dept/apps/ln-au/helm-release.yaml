@@ -53,7 +53,7 @@ spec:
 
     ingress:
       enabled: true
-      ingressClassName: "traefik"
+      ingressClassName: "nginx"
 
       hosts:
         - host: "ln.au"

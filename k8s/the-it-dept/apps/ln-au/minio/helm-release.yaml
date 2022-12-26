@@ -51,7 +51,7 @@ spec:
       enabled: false
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
-      ingressClassName: "traefik"
+      ingressClassName: "nginx"
       path: /
       hosts:
         - &host s3.ln.au
@@ -62,7 +62,7 @@ spec:
 
     consoleIngress:
       enabled: true
-      ingressClassName: "traefik"
+      ingressClassName: "nginx"
       path: /
       hosts:
         - &consolehost s3-console.ln.au

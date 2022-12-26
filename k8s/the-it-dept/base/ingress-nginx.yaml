@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: traefik
+  name: ingress-nginx
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -13,7 +13,7 @@ spec:
     kind: GitRepository
     name: flux-system
   prune: true
-  path: ./k8s/the-it-dept/traefik
+  path: ./k8s/the-it-dept/ingress-nginx
   validation: client
   decryption:
     provider: sops

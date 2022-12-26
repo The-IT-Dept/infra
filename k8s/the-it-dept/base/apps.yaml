@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: cluster-config
     - name: metallb
-    - name: traefik
+    - name: ingress-nginx
     - name: sources
     - name: kyverno
   sourceRef:

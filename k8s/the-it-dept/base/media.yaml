@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: cluster-config
     - name: metallb
-    - name: traefik
+    - name: ingress-nginx
   sourceRef:
     kind: GitRepository
     name: flux-system
