@@ -17,6 +17,8 @@ spec:
   interval: 5m
 
   values:
+    additionalArguments:
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
 
     deployment:
       replicas: 5
