@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: ghcr.io/the-it-dept/ln.au
-      tag: v0.2.0
+      tag: v0.2.1
 
 
     imagePullSecrets:
