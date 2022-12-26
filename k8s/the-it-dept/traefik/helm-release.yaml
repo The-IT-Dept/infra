@@ -17,9 +17,6 @@ spec:
   interval: 5m
 
   values:
-    ports:
-      web:
-        redirectTo: websecure
 
     deployment:
       replicas: 5
