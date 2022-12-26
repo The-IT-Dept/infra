@@ -17,6 +17,10 @@ spec:
   interval: 5m
 
   values:
+    ports:
+      web:
+        redirectTo: websecure
+
     deployment:
       replicas: 5
 
@@ -32,7 +36,3 @@ spec:
       spec:
         externalTrafficPolicy: Local
         loadBalancerIP: ${SECRET_INGRESS_PUBLIC_IPV4}
-
-    ssl:
-      enabled: true
-      permanentRedirect: true
