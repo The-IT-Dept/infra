@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: erxes-widgets-api-env
-data:
-  DEBUG: "erxes-widgets-api:*"
-  NODE_ENV: production
-  PORT: "3300"

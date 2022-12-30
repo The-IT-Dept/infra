@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: erxes-common-env
-data:
-  REDIS_HOST: redis-master

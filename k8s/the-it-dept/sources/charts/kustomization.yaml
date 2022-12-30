@@ -17,6 +17,7 @@ resources:
   - nicko170.yaml
   - ingress-nginx-charts.yaml
   - common.yaml
+  - erpnext.yaml
   - vouch.yaml
   - kongz.yaml
   - traefik-charts.yaml
