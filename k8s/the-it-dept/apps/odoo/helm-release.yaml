@@ -32,21 +32,8 @@ spec:
     ingress:
       enabled: true
       ingressClassName: "nginx"
-
-      hosts:
-        - host: &host theitdept.au
-          paths:
-            - path: /
-              pathType: Prefix
-
-      tls:
-        - hosts:
-            - *host
-          secretName: *host
-
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-production
-
+      hostname: theitdept.au
+      tls: true
 
     persistence:
       size: 50Gi
