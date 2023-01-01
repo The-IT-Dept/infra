@@ -1,0 +1,56 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: theitdept
+  namespace: odoo
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.bitnami.com/bitnami
+      chart: odoo
+      version: 23.0.4
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 5m
+
+  values:
+    odooEmail: ${SECRET_ODOO_EMAIL}
+    odooPassword: ${SECRET_ODOO_PASSWORD}
+    smtpHost: postal.theitdept.au
+    smtpPort: "2999"
+    smtpUser: ${SECRET_ODOO_POSTAL_SMTP_USER}
+    smtpPassword: ${SECRET_ODOO_POSTAL_SMTP_PASSWORD}
+    smtpProtocol: ""
+
+    service:
+      type: ClusterIP
+
+    ingress:
+      enabled: true
+      ingressClassName: "nginx"
+
+      hosts:
+        - host: &host theitdept.au
+          paths:
+            - path: /
+              pathType: Prefix
+
+      tls:
+        - hosts:
+            - *host
+          secretName: *host
+
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+
+
+    persistence:
+      size: 50Gi
+      storageClass: "zfs"
+      accessModes:
+        - ReadWriteMany
+      accessMode: ReadWriteMany
