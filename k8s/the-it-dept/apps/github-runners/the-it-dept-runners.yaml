@@ -3,7 +3,7 @@ kind: RunnerDeployment
 metadata:
   name: the-it-dept-runners
 spec:
-  replicas: 5
+  replicas: 10
   template:
     spec:
       organization: the-it-dept
