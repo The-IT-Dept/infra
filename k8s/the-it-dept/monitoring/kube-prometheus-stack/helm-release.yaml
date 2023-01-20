@@ -138,7 +138,7 @@ spec:
           cluster: the-it-dept
         thanos:
           # renovate: datasource=docker depName=quay.io/thanos/thanos
-          image: quay.io/thanos/thanos:v0.29.0
+          image: quay.io/thanos/thanos:v0.30.0
           version: "v0.29.0"
         podAntiAffinity: hard
         ruleSelectorNilUsesHelmValues: false
