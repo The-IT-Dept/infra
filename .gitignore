@@ -1,1 +1,5 @@
 /.idea/
+/init/media/terraform.tfstate
+/init/media/terraform.tfstate.backup
+/init/media/.terraform/
+/modules/vm-ubuntu-2204/.terraform/
