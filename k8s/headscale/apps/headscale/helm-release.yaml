@@ -25,10 +25,13 @@ spec:
       main:
         enabled: true
         hosts:
-          - path: /
-            pathType: Prefix
-            service: 
-              port: http
+          - host: &host "ts.theitdept.au"
+            paths:
+              - path: /
+
+        tls:
+          - hosts:
+              - *host
     
     persistence:
       config:
