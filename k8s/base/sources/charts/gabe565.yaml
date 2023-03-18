@@ -1,9 +1,8 @@
-
-
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: gabe565-charts
 spec:
   interval: 30m
-  url: https://charts.bitnami.com/bitnami
+  url: https://charts.gabe565.com

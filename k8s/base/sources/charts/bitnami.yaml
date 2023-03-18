@@ -1,9 +1,8 @@
-
-
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: t3n
+  name: bitnami
 spec:
   interval: 30m
-  url: https://storage.googleapis.com/t3n-helm-charts
+  url: https://charts.bitnami.com/bitnami

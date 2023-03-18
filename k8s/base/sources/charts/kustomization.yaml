@@ -8,6 +8,7 @@ resources:
   - bitnami.yaml
   - bjw-s-helm-charts.yaml
   - jetstack.yaml
+  - gabe565.yaml
   - grafana-charts.yaml
   - prometheus-community-charts.yaml
   - t3n.yaml
