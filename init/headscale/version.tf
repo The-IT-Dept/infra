@@ -1,5 +1,10 @@
 terraform {
   required_providers {
+    external = {
+      source  = "hashicorp/external"
+      version = ">=2.3.1"
+    }
+
     flux = {
       source  = "fluxcd/flux"
       version = ">=0.24.2"
@@ -15,10 +20,6 @@ terraform {
     tls = {
       source  = "hashicorp/tls"
       version = ">=4.0.4"
-    }
-    external = {
-      source  = "hashicorp/external"
-      version = ">=2.3.1"
     }
   }
 }

@@ -33,11 +33,11 @@ provider "proxmox" {
 
   # Logging/Debug
   # this is just for debugging. set to false when you are done
-  pm_debug = false
+  pm_debug      = false
   pm_log_enable = false
-  pm_log_file = "terraform-plugin-proxmox.log"
+  pm_log_file   = "terraform-plugin-proxmox.log"
   pm_log_levels = {
-    _default = "debug"
+    _default    = "debug"
     _capturelog = ""
- }
+  }
 }

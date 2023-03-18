@@ -1,11 +1,11 @@
 variable "template" {
-  type = string
+  type    = string
   default = "The name of the template to use for the instance."
 }
 
 variable "ssh_keys" {
-  default = []
-  type  = list(string)
+  default     = []
+  type        = list(string)
   description = "Additional SSH Keys to add to the instances"
 }
 
@@ -15,12 +15,12 @@ variable "machines" {
     target_node = string
     pool        = string
     cores       = number
-    socket     = number
-    balloon      = number
+    socket      = number
+    balloon     = number
     memory      = number
 
-    storage_0_size   = string
-    storage_0_dev    = string
+    storage_0_size = string
+    storage_0_dev  = string
 
     network_0_ip_gw     = string
     network_0_ip_cidr   = string
@@ -50,12 +50,12 @@ variable "pm_api_token_id" {
   type        = string
   default     = ""
   description = "Proxmox API key"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "pm_api_token_secret" {
   type        = string
   default     = ""
   description = "Proxmox API key"
-  sensitive = true
+  sensitive   = true
 }

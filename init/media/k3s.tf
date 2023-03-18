@@ -16,19 +16,19 @@ module "k3s" {
   managed_fields = ["label", "taint"]
 
   servers = {
-  for name, machine in local.machines : name => {
-    ip = split("/", machine.network_0_ip_cidr)[0]
+    for name, machine in local.machines : name => {
+      ip = split("/", machine.network_0_ip_cidr)[0]
 
-    connection = {
-      user        = "sysadmin",
-      host        = split("/", machine.network_0_ip_cidr)[0]
-      private_key = module.virtual_machine.virtual_machine_private_key
-    },
-    flags = [
-      "--disable traefik", "--disable servicelb", "--disable-network-policy",
-      "--flannel-iface=eth0"
-    ]
-    labels = { "node.kubernetes.io/type" = "master" }
-  }
+      connection = {
+        user        = "sysadmin",
+        host        = split("/", machine.network_0_ip_cidr)[0]
+        private_key = module.virtual_machine.virtual_machine_private_key
+      },
+      flags = [
+        "--disable traefik", "--disable servicelb", "--disable-network-policy",
+        "--flannel-iface=eth0"
+      ]
+      labels = { "node.kubernetes.io/type" = "master" }
+    }
   }
 }

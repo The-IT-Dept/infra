@@ -8,12 +8,12 @@ resource "proxmox_vm_qemu" "virtual_machines" {
     tls_private_key.virtual_machine_keys
   ]
 
-  for_each         = var.machines
+  for_each = var.machines
   #vmid             = each.value.id
   name             = "${each.key}.${var.dns_zone}"
   desc             = "${each.key}.${var.dns_zone}"
-  qemu_os          = "l26"                             # Type of Operating System
-  os_type          = "cloud-init"                      # Set to cloud-init to utilize templates
+  qemu_os          = "l26"        # Type of Operating System
+  os_type          = "cloud-init" # Set to cloud-init to utilize templates
   agent            = 1
   full_clone       = false
   clone            = var.template # Name of Template Used to Clone

@@ -1,5 +1,7 @@
 /.idea/
-/init/media/terraform.tfstate
-/init/media/terraform.tfstate.backup
-/init/media/.terraform/
-/modules/vm-ubuntu-2204/.terraform/
+**/terraform.tfstate
+**/terraform.tfstate.backup
+**/.terraform/
+**/.terraform/
+/init/pbx/terraform.tfstate
+/init/pbx/terraform.tfstate.backup

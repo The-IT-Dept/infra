@@ -7,7 +7,7 @@ module "virtual_machine" {
 
   machines = local.machines
   template = "ubuntu-2204-cloudinit-template"
-  dns_zone = "media.theitdept.au"
+  dns_zone = "syd.theitdept.au"
 
   ssh_keys = [
     "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGhF0XL0hKR8Z97ZvsR8pOfVFPqzJ+5rTlT02s1iNeYFL0kvINgYjC+8SXJq2Vjx2ILvAPF8DhEYfT7BTp1dUIk= nick@npratley.net-1",
