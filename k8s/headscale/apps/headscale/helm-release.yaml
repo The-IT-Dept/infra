@@ -35,7 +35,7 @@ spec:
           - sh
           - -c
           - |
-            cat <<'EOF' >/etc/headscale/config
+            cat <<'EOF' >/etc/headscale/config.yaml
             server_url: https://ts.theitdept.au
             listen_addr: 0.0.0.0:8080
             metrics_listen_addr: 0.0.0.0:9090
@@ -152,6 +152,7 @@ spec:
     persistence:
       config:
         enabled: true
+        mountPath: /etc/headscale
         type: pvc
         accessMode: ReadWriteOnce
         size: 2Gi
