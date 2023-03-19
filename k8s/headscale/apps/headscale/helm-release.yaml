@@ -8,21 +8,74 @@ spec:
   releaseName: headscale
   chart:
     spec:
-      chart: headscale
-      version: 0.8.4
+      chart: app-template
+      version: 1.3.2
       sourceRef:
         kind: HelmRepository
-        name: gabe565-charts
+        name: bjw-s-helm-charts
         namespace: flux-system
   interval: 5m
 
   values:
+    image:
+      repository: ghcr.io/juanfont/headscale
+      pullPolicy: IfNotPresent
+      tag: 0.20.0
+
     initContainers:
-      config: {}
+      config:
+        image: alpine
+        volumeMounts:
+          - name: config
+            mountPath: /etc/headscale
+        command:
+          - sh
+          - -c
+          - |
+            cat <<'EOF' >/etc/headscale/config.yaml
+            server_url: https://ts.theitdept.au
+            listen_addr: 0.0.0.0:8080
+            metrics_listen_addr: 0.0.0.0:9090
+            grpc_listen_addr: 0.0.0.0:50443
+            grpc_allow_insecure: false
+            private_key_path: /etc/headscale/private.key
+
+            noise:
+              private_key_path: /etc/headscale/noise.key
+
+            ip_prefixes:
+              - fd7a:115c:a1e0::/48
+              - 100.64.0.0/10
+
+            derp:
+              server:
+                enabled: false
+
+            db_path: /etc/headscale/db.sqlite3
+            db_type: sqlite3
+
+            log:
+                level: info
+                format: text
+
+            acl_policy_path: ""
+
+            dns_config:
+              override_local_dns: true
+              nameservers:
+                - 1.1.1.1
+                - 8.8.8.8
+              magic_dns: true
+              base_domain: 7b.au
+
+            logtail:
+              enabled: false
+
+            randomize_client_port: false
+            EOF
 
     env:
       TZ: Australia/Sydney
-      HEADSCALE_DNS_CONFIG_BASE_DOMAIN: ts.theitdept.au
 
     sidecars:
       ui:
@@ -51,6 +104,13 @@ spec:
     service:
       main:
         ports:
+          http:
+            port: 8080
+          metrics:
+            port: 9090
+          grpc:
+            enabled: false
+            port: 50443
           ui:
             port: 5000
 
@@ -91,6 +151,7 @@ spec:
         type: pvc
         accessMode: ReadWriteOnce
         size: 2Gi
+
       ui-data:
         enabled: true
         type: pvc
