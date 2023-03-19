@@ -8,7 +8,7 @@ spec:
   releaseName: postgres
   chart:
     spec:
-      chart: postgres
+      chart: postgresql
       version: 12.2.4
       sourceRef:
         kind: HelmRepository
