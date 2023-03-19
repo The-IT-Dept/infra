@@ -47,9 +47,6 @@ spec:
           -Djava.awt.headless=true
           -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
 
-    http:
-      relativePath: ""
-
     ingress:
       enabled: true
       annotations:
