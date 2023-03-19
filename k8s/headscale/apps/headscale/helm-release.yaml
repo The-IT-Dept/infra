@@ -35,7 +35,7 @@ spec:
           - sh
           - -c
           - |
-            cat <<'EOF' >/etc/headscale/config.yaml
+            cat <<'EOF' >/etc/headscale/config
             server_url: https://ts.theitdept.au
             listen_addr: 0.0.0.0:8080
             metrics_listen_addr: 0.0.0.0:9090
