@@ -53,6 +53,20 @@ spec:
             derp:
               server:
                 enabled: false
+                region_id: 999
+                region_code: "headscale"
+                region_name: "Headscale Embedded DERP"
+
+                stun_listen_addr: "0.0.0.0:3478"
+
+              urls:
+                - https://controlplane.tailscale.com/derpmap/default
+
+              paths: []
+              auto_update_enabled: true
+              update_frequency: 24h
+
+            disable_check_updates: true
 
             db_path: /etc/headscale/db.sqlite3
             db_type: sqlite3
