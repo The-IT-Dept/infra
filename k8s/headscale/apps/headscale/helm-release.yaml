@@ -23,10 +23,21 @@ spec:
 
     sidecars:
       ui:
-        image: ghcr.io/gurucomputing/headscale-ui:latest
+        image: ghcr.io/ifargle/headscale-webui:latest
         ports:
           - name: http
             containerPort: 80
+        env:
+          TZ: Australia/Sydney
+          COLOR: red
+          HS_SERVER: https://ts.theitdept.au
+          DOMAIN_NAME: https://ts.theitdept.au
+          SCRIPT_NAME: /admin
+          KEY: "MzM3+bMMpGLklbHTJGIpSCsEZJh98b4l5/13mrk7QQs="
+          AUTH_TYPE: basic
+          LOG_LEVEL: info
+          BASIC_AUTH_USER: admin
+          BASIC_AUTH_PASS: password
 
     service:
       main:
