@@ -89,9 +89,33 @@ spec:
               enabled: false
 
             randomize_client_port: false
+
+            oidc:
+              client_id: ${OIDC_CLIENT_ID}
+              client_secret: ${OIDC_CLIENT_SECRET}
+              enabled: true
+              issuer: https://auth.theitdept.au/auth/realms/The%20IT%20Dept
+              only_start_if_oidc_is_available: true
+              scope:
+                - openid
+                - profile
+                - email
+              strip_email_domain: true
+              allowed_groups:
+                - allow_access
             EOF
 
-
+        env:
+          - name: OIDC_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: headscale-secrets
+                key: oidc-client-id
+          - name: OIDC_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: headscale-secrets
+                key: oidc-client-secret
     env:
       TZ: Australia/Sydney
 
