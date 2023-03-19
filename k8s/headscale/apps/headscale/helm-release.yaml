@@ -20,14 +20,14 @@ spec:
     env:
       TZ: Australia/Sydney
       HEADSCALE_DNS_CONFIG_BASE_DOMAIN: ts.theitdept.au
-    
+
     ingress:
       main:
         enabled: true
 
-        annotations: 
+        annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
-        
+
         hosts:
           - host: &host "ts.theitdept.au"
             paths:
@@ -36,7 +36,8 @@ spec:
         tls:
           - hosts:
               - *host
-    
+            secretName: *host
+
     persistence:
       config:
         enabled: true
