@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./k8s/headscale/base
+  path: ./k8s/admin/base
   prune: true
   sourceRef:
     kind: GitRepository
