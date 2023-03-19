@@ -25,7 +25,8 @@ spec:
           database: keycloak
           existingSecret: keycloak-secrets
           secretKeys:
-            adminPasswordKey: postgresql-password
+            adminPasswordKey: postgres-password
+            userPasswordKey: postgres-password
 
     primary:
       persistence:
