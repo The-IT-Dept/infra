@@ -12,3 +12,11 @@ spec:
   prune: true
   path: ./k8s/headscale/apps
   validation: client
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings

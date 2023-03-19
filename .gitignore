@@ -5,3 +5,4 @@
 **/.terraform/
 /init/pbx/terraform.tfstate
 /init/pbx/terraform.tfstate.backup
+/age.agekey

@@ -110,8 +110,14 @@ spec:
           KEY: "MzM3+bMMpGLklbHTJGIpSCsEZJh98b4l5/13mrk7QQs="
           AUTH_TYPE: basic
           LOG_LEVEL: info
-          BASIC_AUTH_USER: admin
-          BASIC_AUTH_PASS: password
+          BASIC_AUTH_USER:
+            secretKeyRef:
+              name: headscale-secrets
+              key: username
+          BASIC_AUTH_PASS:
+            secretKeyRef:
+              name: headscale-secrets
+              key: password
         volumeMounts:
           - name: config
             mountPath: /etc/headscale
