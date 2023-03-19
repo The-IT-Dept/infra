@@ -6,12 +6,15 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
+
   sourceRef:
     kind: GitRepository
     name: flux-system
+
   prune: true
   path: ./k8s/headscale/apps
   validation: client
+
   decryption:
     provider: sops
     secretRef:
