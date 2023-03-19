@@ -135,16 +135,23 @@ spec:
             secretKeyRef:
               name: headscale-secrets
               key: key
-          AUTH_TYPE: basic
+
           LOG_LEVEL: info
-          BASIC_AUTH_USER:
+
+          AUTH_TYPE: oidc
+
+          OIDC_AUTH_URL: https://auth.theitdept.au/auth/realms/The%20IT%20Dept/.well-known/openid-configuration
+
+          OIDC_CLIENT_ID:
             secretKeyRef:
               name: headscale-secrets
-              key: username
-          BASIC_AUTH_PASS:
+              key: oidc-headscale-webui-client-id
+
+          OIDC_SECRET:
             secretKeyRef:
               name: headscale-secrets
-              key: password
+              key: oidc-headscale-webui-client-secret
+
         volumeMounts:
           - name: config
             mountPath: /etc/headscale
