@@ -21,6 +21,19 @@ spec:
       TZ: Australia/Sydney
       HEADSCALE_DNS_CONFIG_BASE_DOMAIN: ts.theitdept.au
 
+    sidecars:
+      ui:
+        image: ghcr.io/gurucomputing/headscale-ui:latest
+        ports:
+          - name: http
+            containerPort: 80
+
+    service:
+      main:
+        ports:
+          ui:
+            port: 80
+
     ingress:
       main:
         enabled: true
@@ -37,6 +50,20 @@ spec:
           - hosts:
               - *host
             secretName: *host
+
+      ui:
+        enabled: true
+        hosts:
+          - host: *host
+            paths:
+              - path: /web
+                service:
+                  port: 80
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
 
     persistence:
       config:
