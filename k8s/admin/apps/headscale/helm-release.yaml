@@ -27,7 +27,7 @@ spec:
 
     initContainers:
       config:
-        image: alpine
+        image: ubuntu
         volumeMounts:
           - name: config
             mountPath: /etc/headscale
