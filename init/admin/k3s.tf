@@ -3,7 +3,7 @@ module "k3s" {
 
   k3s_version    = local.k3s_version
   use_sudo       = true
-  cluster_domain = local.cluster_name
+  cluster_domain = "cluster.local"
 
   cidr = {
     pods     = "10.42.0.0/16"
