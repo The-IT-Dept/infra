@@ -71,7 +71,7 @@ spec:
       port: 5432
       username: keycloak
       existingSecret: keycloak-secrets
-      existingSecretKey: postgresql-password
+      existingSecretKey: postgres-password
       database: keycloak
 
     dbchecker:
