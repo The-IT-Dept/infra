@@ -22,6 +22,8 @@ spec:
       pullPolicy: IfNotPresent
       tag: 0.20.0
 
+    args: ["headscale", "serve"]
+
     initContainers:
       config:
         image: alpine
@@ -73,6 +75,7 @@ spec:
 
             randomize_client_port: false
             EOF
+
 
     env:
       TZ: Australia/Sydney
