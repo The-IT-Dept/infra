@@ -1,0 +1,32 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: postgres
+  namespace: keycloak
+spec:
+  releaseName: postgres
+  chart:
+    spec:
+      chart: postgres
+      version: 12.2.4
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+
+  interval: 5m
+
+  values:
+    global:
+      postgresql:
+        auth:
+          username: keycloak
+          database: keycloak
+          existingSecret: keycloak-secrets
+          secretKeys:
+            adminPasswordKey: postgresql-password
+
+    primary:
+      persistence:
+        size: 10Gi
