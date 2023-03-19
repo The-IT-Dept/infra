@@ -67,7 +67,7 @@ spec:
         hosts:
           - host: *host
             paths:
-              - path: /web
+              - path: /admin
                 service:
                   port: 80
         tls:
