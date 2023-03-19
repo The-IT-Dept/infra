@@ -1,0 +1,187 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: headscale
+  namespace: headscale
+spec:
+  releaseName: headscale
+  chart:
+    spec:
+      chart: app-template
+      version: 1.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s-helm-charts
+        namespace: flux-system
+
+  interval: 5m
+
+  values:
+    image:
+      repository: ghcr.io/juanfont/headscale
+      pullPolicy: IfNotPresent
+      tag: 0.20.0
+
+    args: ["headscale", "serve"]
+
+    initContainers:
+      config:
+        image: alpine
+        volumeMounts:
+          - name: config
+            mountPath: /etc/headscale
+        command:
+          - sh
+          - -c
+          - |
+            cat <<'EOF' >/etc/headscale/config.yaml
+            server_url: https://ts.theitdept.au
+            listen_addr: 0.0.0.0:8080
+            metrics_listen_addr: 0.0.0.0:9090
+            grpc_listen_addr: 0.0.0.0:50443
+            grpc_allow_insecure: false
+            private_key_path: /etc/headscale/private.key
+
+            noise:
+              private_key_path: /etc/headscale/noise.key
+
+            ip_prefixes:
+              - fd7a:115c:a1e0::/48
+              - 100.64.0.0/10
+
+            derp:
+              server:
+                enabled: false
+                region_id: 999
+                region_code: "headscale"
+                region_name: "Headscale Embedded DERP"
+
+                stun_listen_addr: "0.0.0.0:3478"
+
+              urls:
+                - https://controlplane.tailscale.com/derpmap/default
+
+              paths: []
+              auto_update_enabled: true
+              update_frequency: 24h
+
+            disable_check_updates: true
+
+            db_path: /etc/headscale/db.sqlite3
+            db_type: sqlite3
+
+            log:
+                level: info
+                format: text
+
+            acl_policy_path: ""
+
+            dns_config:
+              override_local_dns: true
+              nameservers:
+                - 1.1.1.1
+                - 8.8.8.8
+              magic_dns: true
+              base_domain: 7b.au
+
+            logtail:
+              enabled: false
+
+            randomize_client_port: false
+            EOF
+
+
+    env:
+      TZ: Australia/Sydney
+
+    sidecars:
+      ui:
+        image: ghcr.io/ifargle/headscale-webui:latest
+        ports:
+          - name: http
+            containerPort: 5000
+        env:
+          TZ: Australia/Sydney
+          COLOR: red
+          HS_SERVER: https://ts.theitdept.au
+          DOMAIN_NAME: https://ts.theitdept.au
+          SCRIPT_NAME: /admin
+          KEY:
+            secretKeyRef:
+              name: headscale-secrets
+              key: key
+          AUTH_TYPE: basic
+          LOG_LEVEL: info
+          BASIC_AUTH_USER:
+            secretKeyRef:
+              name: headscale-secrets
+              key: username
+          BASIC_AUTH_PASS:
+            secretKeyRef:
+              name: headscale-secrets
+              key: password
+        volumeMounts:
+          - name: config
+            mountPath: /etc/headscale
+            readOnly: true
+          - name: ui-data
+            mountPath: /data
+
+    service:
+      main:
+        ports:
+          http:
+            port: 8080
+          metrics:
+            port: 9090
+          grpc:
+            enabled: false
+            port: 50443
+          ui:
+            port: 5000
+
+    ingress:
+      main:
+        enabled: true
+
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-production
+
+        hosts:
+          - host: &host "ts.theitdept.au"
+            paths:
+              - path: /
+
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+      ui:
+        enabled: true
+        hosts:
+          - host: *host
+            paths:
+              - path: /admin
+                service:
+                  port: 5000
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
+
+
+    persistence:
+      config:
+        enabled: true
+        mountPath: /etc/headscale
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 2Gi
+
+      ui-data:
+        enabled: true
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 2Gi
