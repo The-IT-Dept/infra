@@ -17,6 +17,9 @@ spec:
   interval: 5m
 
   values:
+    initContainers:
+      config: {}
+
     env:
       TZ: Australia/Sydney
       HEADSCALE_DNS_CONFIG_BASE_DOMAIN: ts.theitdept.au
