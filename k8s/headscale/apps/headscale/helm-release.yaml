@@ -38,6 +38,12 @@ spec:
           LOG_LEVEL: info
           BASIC_AUTH_USER: admin
           BASIC_AUTH_PASS: password
+        volumeMounts:
+          - name: config
+            mountPath: /etc/headscale
+            readOnly: true
+          - name: ui-data
+            mountPath: /data
 
     service:
       main:
@@ -69,7 +75,7 @@ spec:
             paths:
               - path: /admin
                 service:
-                  port: 80
+                  port: 5000
         tls:
           - hosts:
               - *host
@@ -78,6 +84,11 @@ spec:
 
     persistence:
       config:
+        enabled: true
+        type: pvc
+        accessMode: ReadWriteOnce
+        size: 2Gi
+      ui-data:
         enabled: true
         type: pvc
         accessMode: ReadWriteOnce
