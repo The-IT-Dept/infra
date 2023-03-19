@@ -47,12 +47,19 @@ spec:
           -Djava.awt.headless=true
           -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
 
+    http:
+      relativePath: ""
+
     ingress:
       enabled: true
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
       rules:
         - host: &host auth.theitdept.au
+          paths:
+            - path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}/'
+              pathType: Prefix
+
       tls:
         - hosts:
             - *host
