@@ -60,7 +60,7 @@ spec:
 
     database:
       vendor: postgres
-      hostname: postgresql
+      hostname: postgres-postgresql
       port: 5432
       username: keycloak
       existingSecret: keycloak-secrets
