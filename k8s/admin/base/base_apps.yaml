@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: base_apps
+  name: base-apps
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -13,4 +13,4 @@ spec:
   path: ./k8s/base/apps
   validation: client
   dependsOn:
-    - name: base_sources
+    - name: base-sources
