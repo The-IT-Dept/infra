@@ -147,7 +147,7 @@ spec:
               name: headscale-secrets
               key: oidc-headscale-webui-client-id
 
-          OIDC_SECRET:
+          OIDC_CLIENT_SECRET:
             secretKeyRef:
               name: headscale-secrets
               key: oidc-headscale-webui-client-secret
