@@ -21,7 +21,7 @@ variable "machines" {
     target_node = optional(string)
     pool        = optional(string)
     cores       = optional(number)
-    socket      = optional(number)
+    sockets     = optional(number)
     balloon     = optional(number)
     memory      = optional(number)
 
@@ -64,9 +64,9 @@ variable "dns_zone" {
 }
 
 variable "dns_servers" {
-  type        = string
+  type        = list(string)
   default     = ""
-  description = "Space delimited string of up to 3 DNS resolvers."
+  description = "list of up to 3 DNS resolvers."
 }
 
 variable "pm_api_url" {
