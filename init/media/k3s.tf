@@ -1,5 +1,5 @@
 module "k3s" {
-  source = "github.com/djh00t/terraform-module-k3s?ref=5c5fdecc0280e0a75d6fb118395247102c0d232a"
+  source = "github.com/xunleii/terraform-module-k3s?ref=724400c6535f20494cc9f09dc5970f151a9ce7ff"
 
   depends_on = [module.virtual_machine]
 
