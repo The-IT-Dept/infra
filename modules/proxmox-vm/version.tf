@@ -12,6 +12,7 @@ terraform {
   }
   required_version = ">= 0.13"
 }
+
 provider "proxmox" {
   # URL to access proxmox API
   pm_api_url = var.pm_api_url
