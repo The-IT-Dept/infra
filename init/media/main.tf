@@ -1,6 +1,11 @@
 locals {
   cluster_name = "media.theitdept.au"
 
+  github_org    = "the-it-dept"
+  github_repo   = "infra"
+  github_branch = "main"
+  flux_path     = "k8s/media/base"
+
   networks = {
     vlan100 = {
       model        = "virtio",
