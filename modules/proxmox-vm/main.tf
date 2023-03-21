@@ -25,7 +25,8 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   sshkeys = join("\r\n", var.ssh_keys)
 
   searchdomain = var.dns_zone
-  nameserver   = join(" ", var.dns_servers)
+
+  nameserver = join(" ", var.dns_servers)
 
   dynamic "disk" {
     for_each = try(length(each.value.storage), 0) > 0 ? each.value.storage : []
