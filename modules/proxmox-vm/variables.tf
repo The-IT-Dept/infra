@@ -65,8 +65,18 @@ variable "dns_zone" {
 
 variable "dns_servers" {
   type        = list(string)
-  default     = ""
+  default     = []
   description = "list of up to 3 DNS resolvers."
+
+  validation {
+    condition     = length(var.dns_servers) > 0
+    error_message = "The dns_servers variable must contain at least 1 DNS server."
+  }
+
+  validation {
+    condition     = length(var.dns_servers) <= 3
+    error_message = "The dns_servers variable can only contain up to 3 DNS servers."
+  }
 }
 
 variable "pm_api_url" {
