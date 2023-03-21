@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   target_node      = each.value.target_node
   memory           = each.value.memory
   balloon          = each.value.balloon
-  sockets          = each.value.socket
+  sockets          = each.value.sockets
   cores            = each.value.cores
   oncreate         = true
   onboot           = true

@@ -16,6 +16,11 @@ module "virtual_machine" {
 
   ciuser = "sysadmin"
 
+  dns_servers = [
+    "1.1.1.1",
+    "8.8.8.8"
+  ]
+
   ssh_keys = [
     chomp(tls_private_key.ssh_key.public_key_openssh),
     "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGhF0XL0hKR8Z97ZvsR8pOfVFPqzJ+5rTlT02s1iNeYFL0kvINgYjC+8SXJq2Vjx2ILvAPF8DhEYfT7BTp1dUIk= nick@npratley.net-1",
