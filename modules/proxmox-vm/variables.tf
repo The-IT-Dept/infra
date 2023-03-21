@@ -65,8 +65,17 @@ variable "dns_zone" {
 
 variable "dns_servers" {
   type        = list(string)
-  default     = ""
-  description = "list of up to 3 DNS resolvers."
+  default     = []
+  description = "List of up to 3 DNS resolvers."
+
+    validation {
+    condition     = can(regex("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", var.dns_servers))
+    error_message = "Err: Invalid IP Address"
+  }
+  validation {
+    condition     = length(var.dns_servers) <= 3
+    error_message = "Err: cannot have more than 3 servers defined."
+  }
 }
 
 variable "pm_api_url" {
