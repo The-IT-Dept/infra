@@ -63,9 +63,15 @@ variable "dns_zone" {
   description = "Local DNS zone."
 }
 
+variable "dns_servers" {
+  type        = string
+  default     = ""
+  description = "Space delimited string of up to 3 DNS resolvers."
+}
+
 variable "pm_api_url" {
   type        = string
-  default     = "https://hv01:8006/api2/json"
+  default     = ""
   description = "Proxmox host."
 }
 
