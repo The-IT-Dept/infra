@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   target_node      = each.value.target_node
   memory           = each.value.memory
   balloon          = each.value.balloon
-  sockets          = each.value.socket
+  sockets          = each.value.sockets
   cores            = each.value.cores
   oncreate         = true
   onboot           = true
@@ -25,7 +25,8 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   sshkeys = join("\r\n", var.ssh_keys)
 
   searchdomain = var.dns_zone
-  nameserver   = join(" ", var.dns_server)
+
+  nameserver = join(" ", var.dns_servers)
 
   dynamic "disk" {
     for_each = try(length(each.value.storage), 0) > 0 ? each.value.storage : []

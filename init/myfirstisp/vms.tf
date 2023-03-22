@@ -12,7 +12,7 @@ module "virtual_machine" {
   machines = local.machines
 
   template = "ubuntu-2204-cloudinit-template"
-  dns_zone = "media.theitdept.au"
+  dns_zone = local.dns_zone
 
   ciuser = "sysadmin"
 

@@ -64,12 +64,13 @@ variable "dns_zone" {
 }
 
 variable "dns_servers" {
-  type        = list(string)
-  default     = []
+  type    = list(string)
+  default = []
+
   description = "List of up to 3 DNS resolvers."
 
   validation {
-    condition = alltrue([for server in var.dns_servers : can(regex("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", server))])
+    condition     = alltrue([for server in var.dns_servers : can(regex("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", server))])
     error_message = "Err: Invalid IP Address"
   }
 
