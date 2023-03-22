@@ -2,7 +2,7 @@
 **/terraform.tfstate
 **/terraform.tfstate.backup
 **/.terraform/
-**/.terraform/
+**/.kube/
 /init/pbx/terraform.tfstate
 /init/pbx/terraform.tfstate.backup
 /age.agekey
