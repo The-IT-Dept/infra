@@ -30,7 +30,12 @@ locals {
         storage = "ssd-store",
       },
       {
-        size    = "200G",
+        size    = "100G",
+        type    = "scsi",
+        storage = "ssd-store",
+      },
+      {
+        size    = "100G",
         type    = "scsi",
         storage = "ssd-store",
       }
@@ -56,6 +61,20 @@ locals {
       network = [
         merge(local.networks.vlan100, {
           ipv4_address = "172.24.0.17"
+        })
+      ]
+    }),
+    master-3 = merge(local.common, {
+      network = [
+        merge(local.networks.vlan100, {
+          ipv4_address = "172.24.0.18"
+        })
+      ]
+    }),
+    master-4 = merge(local.common, {
+      network = [
+        merge(local.networks.vlan100, {
+          ipv4_address = "172.24.0.19"
         })
       ]
     }),
