@@ -21,7 +21,7 @@ variable "machines" {
     target_node = optional(string)
     pool        = optional(string)
     cores       = optional(number)
-    socket      = optional(number)
+    sockets     = optional(number)
     balloon     = optional(number)
     memory      = optional(number)
 
@@ -63,9 +63,25 @@ variable "dns_zone" {
   description = "Local DNS zone."
 }
 
+variable "dns_servers" {
+  type        = list(string)
+  default     = []
+  description = "List of up to 3 DNS resolvers."
+
+  validation {
+    condition = alltrue([for server in var.dns_servers : can(regex("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", server))])
+    error_message = "Err: Invalid IP Address"
+  }
+
+  validation {
+    condition     = length(var.dns_servers) <= 3
+    error_message = "Err: cannot have more than 3 servers defined."
+  }
+}
+
 variable "pm_api_url" {
   type        = string
-  default     = "https://hv01:8006/api2/json"
+  default     = ""
   description = "Proxmox host."
 }
 
