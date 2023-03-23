@@ -7,6 +7,7 @@ resources:
   - metallb.yaml
   - bitnami.yaml
   - bjw-s-helm-charts.yaml
+  - cnpg-charts.yaml
   - codecentric-charts.yaml
   - jetstack.yaml
   - gabe565.yaml
