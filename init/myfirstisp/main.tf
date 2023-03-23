@@ -19,6 +19,7 @@ locals {
   common = {
     target_node = "hv01"
     pool        = "k8s-myfirstisp"
+    bootdisk    = "scsi0"
     cores       = 4
     sockets     = 4
     balloon     = 4096
