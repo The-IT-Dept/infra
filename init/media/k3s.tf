@@ -18,6 +18,7 @@ module "k3s" {
   global_flags = [
     "--tls-san media.theitdept.au",
     "--flannel-iface ens160",
+    "--disable local-storage"
   ]
 
   servers = {

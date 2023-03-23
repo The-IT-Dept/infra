@@ -1,0 +1,35 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rook-ceph-cluster
+spec:
+  chart:
+    spec:
+      chart: rook-ceph-cluster
+      version: 1.11.2
+      sourceRef:
+        kind: HelmRepository
+        name: rook-charts
+        namespace: flux-system
+  interval: 30m
+  timeout: 10m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: -1
+    crds: CreateReplace
+
+  values:
+    toolbox:
+      enabled: true
+    monitoring:
+      # enabling will also create RBAC rules to allow Operator to create ServiceMonitors
+      enabled: true
+      # whether to create the prometheus rules
+      createPrometheusRules: true
+    pspEnable: false
+    ingress:
+      dashboard: { }
