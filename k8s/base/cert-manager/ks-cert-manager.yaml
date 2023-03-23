@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: "./k8s/base/apps/cert-manager/cert-manager/app"
+  path: "./k8s/base/cert-manager/app"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -21,7 +21,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: "./k8s/base/apps/cert-manager/cert-manager/issuers"
+  path: "./k8s/base/cert-manager/issuers"
   prune: true
   sourceRef:
     kind: GitRepository

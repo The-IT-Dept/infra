@@ -13,7 +13,7 @@ module "k3s" {
   }
 
   drain_timeout  = "90s"
-  managed_fields = ["label", "taint"]
+  managed_fields = ["label", "taint", "annotation"]
 
   global_flags = [
     "--tls-san ${local.dns_zone}",
@@ -34,6 +34,20 @@ module "k3s" {
         "--disable-network-policy", "--flannel-iface=eth0"
       ]
       labels = { "node.kubernetes.io/type" = "master" }
+
+      annotations = {
+        "node.longhorn.io/create-default-disk" = "config"
+        "node.longhorn.io/default-disks-config" : jsonencode([
+          {
+            path : "/data/mount1",
+            allowScheduling : true
+          },
+          {
+            path : "/data/mount2",
+            allowScheduling : true
+          },
+        ])
+      }
     }
   }
 

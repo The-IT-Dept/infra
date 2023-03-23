@@ -27,3 +27,35 @@ module "virtual_machine" {
     "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFZG7NHiFmrHIzB8ThHEyKtPZZsKlxcNjD7qy3tCsSFYw+5ZlSswXpsxaRmoubiAZzL2qWUvwI93kI84OC/7Y+k= nick@npratley.net-2"
   ]
 }
+
+resource "null_resource" "boot_scripts" {
+  depends_on = [module.virtual_machine]
+  for_each   = local.machines
+
+  connection {
+    host        = each.value.network[0].ipv4_address
+    user        = "sysadmin"
+    type        = "ssh"
+    private_key = tls_private_key.ssh_key.private_key_pem
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo -S mkdir -p /etc/cloud/scripts/per-boot",
+      "sudo -S chmod -R 777 /etc/cloud/scripts/per-boot",
+    ]
+  }
+
+  provisioner "file" {
+    source      = "../../scripts/per-boot/"
+    destination = "/etc/cloud/scripts/per-boot/"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo -S chmod -R 755 /etc/cloud/scripts/per-boot/*",
+      "sudo -S chown -R root:root /etc/cloud/scripts/per-boot",
+      "sudo -S run-parts --regex .*?.sh /etc/cloud/scripts/per-boot",
+    ]
+  }
+}
