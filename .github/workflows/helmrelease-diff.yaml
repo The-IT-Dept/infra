@@ -4,7 +4,7 @@ name: "HelmRelease Diff"
 on:
   pull_request:
     branches: ["main"]
-    paths: ["k8s/**/helm-release.yaml", "k8s/**/helm-release.yaml"]
+    paths: ["k8s/**/daemonset.yaml", "k8s/**/daemonset.yaml"]
 
 env:
   # Currently no way to detect automatically

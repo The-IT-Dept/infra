@@ -1,0 +1,14 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-vip
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: kube-vip
+          env:
+            - name: vip_address
+              value: "172.24.0.20"
