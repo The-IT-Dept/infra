@@ -24,6 +24,7 @@ variable "machines" {
     sockets     = optional(number)
     balloon     = optional(number)
     memory      = optional(number)
+    bootdisk    = optional(string)
 
     storage = optional(list(object({
       slot    = optional(number)

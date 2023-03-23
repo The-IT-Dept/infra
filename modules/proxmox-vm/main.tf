@@ -11,7 +11,7 @@ resource "proxmox_vm_qemu" "virtual_machines" {
   pool             = each.value.pool
   hotplug          = "network,disk,usb"
   numa             = true
-  bootdisk         = "virtio0"
+  bootdisk         = can(each.value.bootdisk) ? each.value.bootdisk : "virtio0"
   target_node      = each.value.target_node
   memory           = each.value.memory
   balloon          = each.value.balloon

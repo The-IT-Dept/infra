@@ -12,5 +12,6 @@ spec:
   prune: true
   path: ./k8s/myfirstisp/infra
   validation: client
+
   dependsOn:
     - name: base-sources
