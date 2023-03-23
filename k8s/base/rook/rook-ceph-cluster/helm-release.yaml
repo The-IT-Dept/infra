@@ -26,10 +26,8 @@ spec:
     toolbox:
       enabled: true
     monitoring:
-      # enabling will also create RBAC rules to allow Operator to create ServiceMonitors
-      enabled: true
-      # whether to create the prometheus rules
-      createPrometheusRules: true
+      enabled: false
+      createPrometheusRules: false
     pspEnable: false
     ingress:
       dashboard: { }
