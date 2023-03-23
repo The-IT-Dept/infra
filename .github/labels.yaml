@@ -16,10 +16,10 @@
   color: "72ccf3"
   description: >-
     Changes made in the hack directory
-- name: area/terraform
+- name: area/init
   color: "72ccf3"
   description: >-
-    Changes made in the terraform directory
+    Changes made in the init directory
 # Renovate
 - name: renovate/ansible
   color: "ffc300"
