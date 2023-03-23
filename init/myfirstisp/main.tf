@@ -21,8 +21,8 @@ locals {
     pool        = "k8s-myfirstisp"
     cores       = 4
     sockets     = 4
-    balloon     = 1024
-    memory      = 8192
+    balloon     = 4096
+    memory      = 16384
     storage = [
       {
         size    = "32G",
@@ -31,12 +31,12 @@ locals {
       },
       {
         size    = "100G",
-        type    = "scsi",
+        type    = "virtio",
         storage = "ssd-store",
       },
       {
         size    = "100G",
-        type    = "scsi",
+        type    = "virtio",
         storage = "ssd-store",
       }
     ]
