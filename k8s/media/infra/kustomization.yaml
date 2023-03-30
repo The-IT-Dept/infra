@@ -6,3 +6,4 @@ resources:
   - cloudflared-config.yaml
   - ../../base/cloudflared
   - ../../base/cert-manager
+  - ../../base/ingress-nginx
