@@ -2,4 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - cloudflared-secrets.sops.yaml
+  - cloudflared-config.yaml
+  - ../../base/cloudflared
   - ../../base/cert-manager
