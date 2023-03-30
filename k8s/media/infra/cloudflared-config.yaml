@@ -11,7 +11,4 @@ data:
     metrics: 0.0.0.0:2000
     no-autoupdate: true
     ingress:
-      - hostname: hello.example.com
-        service: hello_world
-      # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
-      - service: http_status:404
+      - service: ingress-nginx-controller.ingress-nginx.svc.cluster.local
