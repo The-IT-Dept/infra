@@ -12,3 +12,5 @@ data:
     no-autoupdate: true
     ingress:
       - service: https://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+        originRequest:
+          noTLSVerify: true
