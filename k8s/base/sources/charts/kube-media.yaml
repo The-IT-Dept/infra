@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: kube-media
+  name: kube-media-charts
 spec:
   interval: 30m
   url: https://kube-media.dev/
