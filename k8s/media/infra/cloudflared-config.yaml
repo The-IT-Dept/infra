@@ -11,4 +11,4 @@ data:
     metrics: 0.0.0.0:2000
     no-autoupdate: true
     ingress:
-      - service: ingress-nginx-controller.ingress-nginx.svc.cluster.local
+      - service: https://ingress-nginx-controller.ingress-nginx.svc.cluster.local
