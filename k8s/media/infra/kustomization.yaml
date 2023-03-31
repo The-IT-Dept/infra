@@ -8,3 +8,6 @@ resources:
   - ../../base/external-dns
   - ../../base/cert-manager
   - ../../base/ingress-nginx
+
+patchesStrategicMerge:
+  - ingress-nginx-patch.yaml
