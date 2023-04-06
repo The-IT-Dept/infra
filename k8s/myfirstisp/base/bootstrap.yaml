@@ -2,8 +2,9 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: patches
+  name: bootstrap
   namespace: flux-system
+
 spec:
   interval: 1m0s
   sourceRef:
@@ -12,8 +13,10 @@ spec:
   prune: true
   validation: client
 
+  path: ./k8s/myfirstisp/bootstrap
+
   patches:
-    # This patch changes the default source sync interval to 1m for all kustomizations and adds a sops decryption provider.
+    # This patch changes the kustomization sync interval to 1m for all kustomizations and adds a sops decryption provider.
     - target:
         group: kustomize.toolkit.fluxcd.io
         kind: Kustomization
