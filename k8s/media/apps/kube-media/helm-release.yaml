@@ -31,6 +31,13 @@ spec:
             path: /volume1/Media
             readOnly: false
 
+        config: # split out from storage to allow for different storage class, such as SSD.
+          pvcName: kube-media-config-pvc
+          customVolume: false  # set to true if not using a PVC (must provide volume below)
+          volumes: { }
+          size: 50Gi
+          pvcStorageClass: ''
+
     plex:
       container:
         nodeSelector:
@@ -38,7 +45,6 @@ spec:
 
       image:
         repository: plexinc/pms-docker
-        tag: 1.31.3.6868-28fc46b27
         pullPolicy: IfNotPresent
       enabled: true
 
