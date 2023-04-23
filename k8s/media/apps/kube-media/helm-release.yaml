@@ -36,7 +36,7 @@ spec:
           customVolume: false  # set to true if not using a PVC (must provide volume below)
           volumes: { }
           size: 50Gi
-          pvcStorageClass: ''
+          pvcStorageClass: 'local-path'
 
     plex:
       container:
