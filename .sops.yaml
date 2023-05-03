@@ -1,4 +1,4 @@
 creation_rules:
-  - path_regex: .*.yaml
+  - path_regex: ^(?!(.*\/)?\.sops\.y(a)?ml$).*\.y(a)?ml$
     encrypted_regex: ^(data|stringData)$
-    age: age1mfp32e7fyypeyfcp6x2zhh4hkym9ra6fyv3g4p7n3klrepefx3ns7uq276
+    age: age1mfp32e7fyypeyfcp6x2zhh4hkym9ra6fyv3g4p7n3klrepefx3ns7uq27
