@@ -16,8 +16,7 @@ spec:
   validation: client
 
   dependsOn:
-    - name: base-sources
-    - name: base-apps
+    - name: infra
 
   decryption:
     provider: sops
