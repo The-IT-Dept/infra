@@ -23,7 +23,7 @@ spec:
 
     image:
       repository: ghcr.io/the-it-dept/rfspager-backend
-      tag: v3.0.7
+      tag: v3.0.8
       pullPolicy: IfNotPresent
 
     imagePullSecrets:
