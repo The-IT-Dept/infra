@@ -22,8 +22,8 @@ spec:
       strategy: "RollingUpdate"
 
     image:
-      repository: ghcr.io/the-it-dept-/rfspager-backend
-      tag: v3.0.6
+      repository: ghcr.io/the-it-dept/rfspager-backend
+      tag: v3.0.7
       pullPolicy: IfNotPresent
 
     imagePullSecrets:
