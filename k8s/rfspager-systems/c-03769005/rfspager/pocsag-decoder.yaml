@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: pocsag-decoder
-          image: ghcr.io/the-it-dept/rfspager:v0.1.0
+          image: ghcr.io/the-it-dept/rfspager:v0.1.1
           args:
             - decoder
           resources:
