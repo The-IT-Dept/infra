@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./k8s/rfspager/base
+  path: ./k8s/rfspager-systems/c-03769005/base
   prune: true
   sourceRef:
     kind: GitRepository
