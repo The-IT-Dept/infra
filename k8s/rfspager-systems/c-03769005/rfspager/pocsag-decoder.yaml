@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rfspager-app
+  labels:
+    app: rfspager-app
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rfspager-app
+  template:
+    metadata:
+      labels:
+        app: rfspager-app
+    spec:
+      containers:
+        - name: pocsag-decoder
+          image: ghcr.io/the-it-dept/rfspager:v0.1.0
+          args:
+            - decoder
+          resources:
+            requests:
+              cpu: 500m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+              squat.ai/rtlsdr: 1
+          envFrom:
+            - secretRef:
+                name: rfspager-secrets
