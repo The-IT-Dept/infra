@@ -24,7 +24,6 @@ spec:
       containers:
         - image: squat/generic-device-plugin
           args:
-            - --domain rfspager.app
             - --device
             - |
               name: rtlsdr
