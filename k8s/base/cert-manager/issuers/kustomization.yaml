@@ -4,3 +4,4 @@ kind: Kustomization
 namespace: cert-manager
 resources:
   - letsencrypt-production.yaml
+  - letsencrypt-production-nginx.yaml
