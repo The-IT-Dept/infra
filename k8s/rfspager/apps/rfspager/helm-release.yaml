@@ -26,6 +26,9 @@ spec:
       tag: v3.0.6
       pullPolicy: IfNotPresent
 
+    imagePullSecrets:
+      - name: ghcr-secret
+
     command: ["/cnb/process/web"]
 
     env:

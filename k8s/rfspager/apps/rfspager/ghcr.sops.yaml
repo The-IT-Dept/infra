@@ -1,0 +1,28 @@
+apiVersion: v1
+data:
+    .dockerconfigjson: ENC[AES256_GCM,data:MdhZNNFaAD1u19wwN1WtPCAwzTrij7sGAt/6kDsJMGcFY4mczLdmdC4DTpOMCJ1KLANemuCFuZ2TNqBO8bUE++PvdoS9x4+C1O/Go9tw6ZDT77204tXjDAOG1VmJfnfMtqCoOT1KtvOVufOC48Rcq6Fq0q/yzIBT4EXwv2evyjYhGx/q3A8apq39FX1DSycIktQsMvXiVnISGB6U14kdWx1tfifiEZDlL8iqnp1QOQZJGM+gCDOLe7JzTUztAwH0I8SGonjGKDDbPRL/QXT6PbQDkVHnHFx89uCkx3iqE9E73E6IYxjh0vwSoR7tnnS0GHoR232yg0USgOURMMnYVKoksJTTbwEmFCYHHt37TprsU/Qy1Z+EO/V973s=,iv:UTEIpWQsxE/iguewdke4XEJW07t9RbZf/zVAcW5hKKc=,tag:pdc7PhP/ExhRrDhsUmUuCg==,type:str]
+kind: Secret
+metadata:
+    name: ghcr-secret
+    namespace: rfspager
+type: kubernetes.io/dockerconfigjson
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1mfp32e7fyypeyfcp6x2zhh4hkym9ra6fyv3g4p7n3klrepefx3ns7uq276
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEMWUzL1Z1dGcyQTJDWTdj
+            RkdQYmtBajNGbjZ5SDZGWlk2NURPSVpObWc0CmNJamhkb2JkeGh4Zys1ZmVvUmIx
+            Q25HTC81b1pJY3R0Q0cwZVhuamNyUlEKLS0tIElSczM3dnRZQ1V1MEcrTzlxbmN0
+            SGgveWtJdmVrSzVmNW5KdlhOSnRUYWsKudtQfuk+nPpqU5HLDIMyA538sZ69a6XN
+            OVyDwCjucFy4+8KzyL2WELqvNap8Gr2BXFORw48zzEYBwAOjWCfMJQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-05-04T03:28:17Z"
+    mac: ENC[AES256_GCM,data:JgoLUfw1Zatnc2BO8v1p7xCIsU4YP7uB1Yu7oGJuxekKhAbiC24T4+oKp2tSVJmGL63kgmHvL5X1p4pPtHru7NWg788COP0sD1h/i7BNDtmedEZX6pvrLCRiLoAdCZToVP7wVStHwI5xDAJThGjBt8fprU48H4aXble9esNnMnA=,iv:XZ6IzzR9Dz2xOr58+8zlo9d02eXvSrOfGh1X2pGe7ME=,tag:158ONUKoDNYGffblvJfJhQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.2
