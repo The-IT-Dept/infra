@@ -5,4 +5,5 @@ resources:
   - namespace.yaml
   - secrets.sops.yaml
   - secretfiles.sops.yaml
+  - ghcr.sops.yaml
   - helm-release.yaml
