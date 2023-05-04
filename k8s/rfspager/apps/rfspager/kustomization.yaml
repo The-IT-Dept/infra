@@ -6,4 +6,5 @@ resources:
   - secrets.sops.yaml
   - secretfiles.sops.yaml
   - ghcr.sops.yaml
+  - rfspager-host-db.yaml
   - helm-release.yaml
