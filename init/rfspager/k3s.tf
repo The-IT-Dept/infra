@@ -28,7 +28,7 @@ module "k3s" {
         private_key = file("~/.ssh/id_rsa")
       },
       flags = [
-        "--disable traefik", "--disable servicelb", "--disable-network-policy",
+        "--disable traefik", "--disable-network-policy",
         "--flannel-iface=ens192"
       ]
       labels = { "node.kubernetes.io/type" = "master" }
