@@ -20,7 +20,6 @@ spec:
     controller:
       replicaCount: 3
       service:
-        # Will route all traffic from cloudflared to the ingress-nginx controller, which will then route it to the correct service
         type: LoadBalancer
 
       publishService:

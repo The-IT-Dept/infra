@@ -7,6 +7,8 @@ metadata:
 spec:
   values:
     controller:
+      replicaCount: 1
       service:
-        annotations:
-          cloud-provider-cloudflare.nicko170.au/tunnel-id: 43f67efe-4a03-4828-a68e-2c1f02f3d76a
+        ports:
+          http: 65530
+          https: 65531
