@@ -33,6 +33,7 @@ spec:
 
     env:
       TZ: Australia/Sydney
+      PORT: 8080
 
     envFrom:
       - secretRef:
