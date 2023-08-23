@@ -32,3 +32,13 @@ resource "github_actions_secret" "rfspager-backend" {
   secret_name     = each.value
   plaintext_value = data.sops_file.github_secrets.data["data.${each.value}"]
 }
+
+resource "github_actions_secret" "stores" {
+  for_each = toset([
+    "BOT_APP_ID", "BOT_APP_PRIVATE_KEY", "DEPLOY_SSH_KEY", "COMPOSER_AUTH", "FONTAWESOME_NPM_AUTH_TOKEN"
+  ])
+
+  repository      = "stores"
+  secret_name     = each.value
+  plaintext_value = data.sops_file.github_secrets.data["data.${each.value}"]
+}
