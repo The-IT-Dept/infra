@@ -58,16 +58,16 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
 
       extraVolumes: []
-      #        - name: vol-media-01
-      #          nfs:
-      #            server: 100.69.2.2
-      #            path: /vol_media_01
-      #            readOnly: true
+        - name: vol-media-01
+          nfs:
+            server: 100.69.2.2
+            path: /vol_media_01
+            readOnly: true
 
       extraMounts: []
-      #        - name: vol-media-01
-      #          mountPath: /mnt/vol_media_01
-      #          readOnly: true
+        - name: vol-media-01
+          mountPath: /mnt/vol_media_01
+          readOnly: true
 
       kubePlex:
         enabled: false
