@@ -57,14 +57,14 @@ spec:
           kubernetes.io/ingress.class: "nginx"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
 
-      extraVolumes: []
+      extraVolumes: 
         - name: vol-media-01
           nfs:
             server: 100.69.2.2
             path: /vol_media_01
             readOnly: true
 
-      extraMounts: []
+      extraMounts: 
         - name: vol-media-01
           mountPath: /mnt/vol_media_01
           readOnly: true
