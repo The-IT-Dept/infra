@@ -63,10 +63,18 @@ spec:
             server: 100.69.2.2
             path: /vol_media_01
             readOnly: true
+        - name: damos
+          nfs:
+            server: 100.69.2.34
+            path: /export/bastion-outbound
+            readOnly: true
 
       extraMounts: 
         - name: vol-media-01
           mountPath: /mnt/vol_media_01
+          readOnly: true
+        - name: damos
+          mountPath: /mnt/damos
           readOnly: true
 
       kubePlex:
