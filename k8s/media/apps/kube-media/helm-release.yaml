@@ -65,8 +65,8 @@ spec:
             readOnly: true
         - name: damos
           nfs:
-            server: 100.69.2.34
-            path: /export/bastion-outbound
+            server: 172.24.0.10
+            path: /mnt/damo
             readOnly: true
 
       extraMounts: 
