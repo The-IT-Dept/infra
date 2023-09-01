@@ -63,19 +63,13 @@ spec:
             server: 100.69.2.2
             path: /vol_media_01
             readOnly: true
-        - name: damo
-          nfs:
-            server: 100.69.2.36
-            path: /mnt/damo
-            readOnly: true
+
 
       extraMounts: 
         - name: vol-media-01
           mountPath: /mnt/vol_media_01
           readOnly: true
-        - name: damo
-          mountPath: /mnt/damo
-          readOnly: true
+
 
       kubePlex:
         enabled: false
