@@ -1,24 +1,26 @@
 locals {
-  dns_zone = "isp.theitdept.au"
+  dns_zone = "node.net.au"
 
   github_org    = "the-it-dept"
   github_repo   = "infra"
   github_branch = "main"
-  flux_path     = "k8s/myfirstisp/base"
+  flux_path     = "k8s/node.net.au/base"
 
   networks = {
-    vlan100 = {
+    vlan10 = {
       model        = "virtio",
       bridge       = "vmbr0",
-      tag          = 100,
+      tag          = 10,
       ipv4_netmask = "24"
-      ipv4_gateway = "172.24.0.254"
+      ipv4_gateway = "44.136.159.17"
+      ipv6_netmask = "64"
+      ipv6_gateway = "2001:df3:a00:1::1"
     }
   }
 
   common = {
     target_node = "hv01"
-    pool        = "k8s-myfirstisp"
+    pool        = "k8s-node.net.au"
     bootdisk    = "scsi0"
     cores       = 4
     sockets     = 4
@@ -31,12 +33,12 @@ locals {
         storage = "ssd-store",
       },
       {
-        size    = "100G",
+        size    = "200G",
         type    = "virtio",
         storage = "ssd-store",
       },
       {
-        size    = "100G",
+        size    = "200G",
         type    = "virtio",
         storage = "ssd-store",
       }
@@ -46,38 +48,29 @@ locals {
   machines = {
     master-0 = merge(local.common, {
       network = [
-        merge(local.networks.vlan100, {
-          ipv4_address = "172.24.0.15"
+        merge(local.networks.vlan10, {
+          ipv4_address = "44.136.159.20"
+          ipv6_address = "2001:df3:a00:1::3"
         })
       ]
     }),
+
     master-1 = merge(local.common, {
       network = [
-        merge(local.networks.vlan100, {
-          ipv4_address = "172.24.0.16"
+        merge(local.networks.vlan10, {
+          ipv4_address = "44.136.159.21"
+          ipv6_address = "2001:df3:a00:1::4"
         })
       ]
-    }),
+    })
+
     master-2 = merge(local.common, {
       network = [
-        merge(local.networks.vlan100, {
-          ipv4_address = "172.24.0.17"
+        merge(local.networks.vlan10, {
+          ipv4_address = "44.136.159.22"
+          ipv6_address = "2001:df3:a00:1::5"
         })
       ]
-    }),
-    master-3 = merge(local.common, {
-      network = [
-        merge(local.networks.vlan100, {
-          ipv4_address = "172.24.0.18"
-        })
-      ]
-    }),
-    master-4 = merge(local.common, {
-      network = [
-        merge(local.networks.vlan100, {
-          ipv4_address = "172.24.0.19"
-        })
-      ]
-    }),
+    })
   }
 }

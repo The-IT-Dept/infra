@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./k8s/myfirstisp/base
+  path: ./k8s/node.net.au/base
   prune: true
   sourceRef:
     kind: GitRepository

@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: flux-system
   prune: true
-  path: ./k8s/myfirstisp/infra
+  path: ./k8s/node.net.au/infra
   validation: client
 
   dependsOn:
