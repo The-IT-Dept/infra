@@ -6,5 +6,6 @@ resources:
   - ../../base/longhorn
   - ../../base/cloudnative-pg
   - ../../base/kube-vip
+  - ../../base/external-dns
 patchesStrategicMerge:
   - kube-vip-patch.yaml
