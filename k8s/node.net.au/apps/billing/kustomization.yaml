@@ -5,5 +5,6 @@ resources:
   - namespace.yaml
   - ghcr.sops.yaml
   - secrets.sops.yaml
+
   - ks-billing-redis.yaml
-  - ks-postgres.yaml
+  - ks-billing-postgres.yaml
