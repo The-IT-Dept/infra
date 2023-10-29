@@ -11,7 +11,7 @@ locals {
       model        = "virtio",
       bridge       = "vmbr0",
       tag          = 10,
-      ipv4_netmask = "24"
+      ipv4_netmask = "28"
       ipv4_gateway = "44.136.159.17"
       ipv6_netmask = "64"
       ipv6_gateway = "2001:df3:a00:1::1"
