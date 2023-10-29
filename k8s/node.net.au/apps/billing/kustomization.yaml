@@ -8,3 +8,4 @@ resources:
 
   - ks-billing-redis.yaml
   - ks-billing-postgres.yaml
+  - ks-billing-app.yaml
