@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: billing-postgres
+  namespace: billing
+spec:
+  releaseName: billing-postgres
+  chart:
+    spec:
+      chart: postgresql
+      version: 16.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+
+  interval: 5m
+
+  values:
+    global:
+      postgresql:
+        auth:
+          username: billing
+          database: billing
+          existingSecret: billing-secrets
+          secretKeys:
+            adminPasswordKey: POSTGRES_PASSWORD
+            userPasswordKey: POSTGRES_PASSWORD
+
+    primary:
+      persistence:
+        size: 25Gi
+
+    readReplicas:
+      replicaCount: 0
