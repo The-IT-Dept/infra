@@ -2,60 +2,55 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: rfspager
-  namespace: rfspager
+  name: billing-app
+  namespace: billing
 
 spec:
-  releaseName: rfspager
+  releaseName: billing-app
   interval: 5m
   chart:
     spec:
       chart: app-template
-      version: 1.4.0
+      version: 2.0.3
       sourceRef:
         kind: HelmRepository
         name: bjw-s-helm-charts
         namespace: flux-system
 
   values:
-    controller:
-      strategy: "RollingUpdate"
+    controllers:
+      main:
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: getlago/front
+              tag: v0.50.0-beta
+              pullPolicy: IfNotPresent
 
-    image:
-      repository: ghcr.io/the-it-dept/rfspager-backend
-      tag: v3.1.0
-      pullPolicy: IfNotPresent
+            env:
+              TZ: Australia/Sydney
 
-    imagePullSecrets:
-      - name: ghcr-secret
-
-    command: ["/cnb/process/web"]
-
-    env:
-      TZ: Australia/Sydney
-      PORT: 8080
-
-    envFrom:
-      - secretRef:
-          name: rfspager-secrets
+            envFrom:
+              - secretRef:
+                name: billing-secrets
 
     service:
       main:
         ports:
           http:
-            port: 8080
+            port: 80
 
     ingress:
       main:
         enabled: true
-
-        ingressClassName: nginx
+        className: traefik
 
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production-nginx
+          cert-manager.io/cluster-issuer: letsencrypt-production
 
         hosts:
-          - host: &host "v2.rfspager.app"
+          - host: &host "billing.node.net.au"
             paths:
               - path: /
 
@@ -63,10 +58,3 @@ spec:
           - hosts:
               - *host
             secretName: *host
-
-    persistence:
-      config:
-        enabled: true
-        mountPath: /etc/rfspager
-        type: secret
-        name: rfspager-secretfiles
