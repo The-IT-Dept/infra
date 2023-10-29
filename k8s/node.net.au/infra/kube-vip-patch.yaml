@@ -11,4 +11,4 @@ spec:
         - name: kube-vip
           env:
             - name: vip_address
-              value: "172.24.0.20"
+              value: "44.136.159.19"
