@@ -172,7 +172,7 @@ spec:
         hosts:
           - host: &apiHost "billing.node.net.au"
             paths:
-              - path: /api
+              - path: /api/
                 pathType: Prefix
                 service: &apiService
                   name: api
@@ -182,7 +182,7 @@ spec:
                 pathType: Prefix
                 service: *apiService
 
-              - path: /webhooks
+              - path: /webhooks/
                 pathType: Prefix
                 service: *apiService
 
@@ -190,11 +190,11 @@ spec:
                 pathType: Prefix
                 service: *apiService
 
-              - path: /admin
+              - path: /admin/
                 pathType: Prefix
                 service: *apiService
 
-              - path: /rails
+              - path: /rails/
                 pathType: Prefix
                 service: *apiService
 
