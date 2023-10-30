@@ -152,13 +152,33 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
 
         hosts:
-          - host: &apiHost "api.billing.node.net.au"
+          - host: &apiHost "billing.node.net.au"
             paths:
-              - path: /
+              - path: /api
                 pathType: Prefix
-                service:
+                service: &apiService
                   name: api
                   port: http
+
+              - path: /graphql
+                pathType: Prefix
+                service: *apiService
+
+              - path: /webhooks
+                pathType: Prefix
+                service: *apiService
+
+              - path: /health
+                pathType: Prefix
+                service: *apiService
+
+              - path: /admin
+                pathType: Prefix
+                service: *apiService
+
+              - path: /rails
+                pathType: Prefix
+                service: *apiService
 
         tls:
           - hosts:
