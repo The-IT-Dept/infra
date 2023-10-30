@@ -155,7 +155,7 @@ spec:
               - path: /
                 pathType: Prefix
                 service:
-                  name: main
+                  name: api
                   port: http
 
         tls:
