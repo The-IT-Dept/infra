@@ -56,6 +56,18 @@ spec:
               - secretRef:
                   name: billing-secrets
 
+      pdf:
+        strategy: RollingUpdate
+        containers:
+          main:
+            image:
+              repository: getlago/lago-gotenberg
+              tag: 7
+              pullPolicy: IfNotPresent
+
+            env:
+              TZ: Australia/Sydney
+
       clock:
         strategy: RollingUpdate
         containers:
@@ -118,6 +130,12 @@ spec:
 
       api:
         controller: api
+        ports:
+          http:
+            port: 3000
+
+      pdf:
+        controller: pdf
         ports:
           http:
             port: 3000
