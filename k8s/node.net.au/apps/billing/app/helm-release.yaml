@@ -115,7 +115,9 @@ spec:
         ports:
           http:
             port: 80
+
       api:
+        controller: api
         ports:
           http:
             port: 3000
