@@ -33,7 +33,7 @@ spec:
 
             envFrom:
               - secretRef:
-                name: billing-secrets
+                  name: billing-secrets
 
     service:
       main:
