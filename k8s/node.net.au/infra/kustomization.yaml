@@ -10,3 +10,4 @@ resources:
 
 patchesStrategicMerge:
   - kube-vip-patch.yaml
+  - external-dns-patch.yaml
