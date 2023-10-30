@@ -10,4 +10,14 @@ resources:
 
 patchesStrategicMerge:
   - kube-vip-patch.yaml
-  - external-dns-patch.yaml
+
+patchesJson6902:
+  - target:
+      version: v1
+      group: apps
+      kind: Deployment
+      name: external-dns
+    patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: "--txt-owner-id=node.net.au"
