@@ -25,7 +25,7 @@ resource "github_actions_secret" "rfspager-app" {
 
 resource "github_actions_secret" "rfspager-backend" {
   for_each = toset([
-    "BOT_APP_ID", "BOT_APP_PRIVATE_KEY"
+    "BOT_APP_ID", "BOT_APP_PRIVATE_KEY", "DEPLOY_SSH_KEY", "COMPOSER_AUTH", "FONTAWESOME_NPM_AUTH_TOKEN"
   ])
 
   repository      = "rfspager-backend"
@@ -39,6 +39,26 @@ resource "github_actions_secret" "stores" {
   ])
 
   repository      = "stores"
+  secret_name     = each.value
+  plaintext_value = data.sops_file.github_secrets.data["data.${each.value}"]
+}
+
+resource "github_actions_secret" "tilly-and-milly-tracking" {
+  for_each = toset([
+    "BOT_APP_ID", "BOT_APP_PRIVATE_KEY", "DEPLOY_SSH_KEY", "COMPOSER_AUTH", "FONTAWESOME_NPM_AUTH_TOKEN"
+  ])
+
+  repository      = "tilly-and-milly-tracking"
+  secret_name     = each.value
+  plaintext_value = data.sops_file.github_secrets.data["data.${each.value}"]
+}
+
+resource "github_actions_secret" "node-isp" {
+  for_each = toset([
+    "BOT_APP_ID", "BOT_APP_PRIVATE_KEY", "COMPOSER_AUTH", "FONTAWESOME_NPM_AUTH_TOKEN"
+  ])
+
+  repository      = "node-isp"
   secret_name     = each.value
   plaintext_value = data.sops_file.github_secrets.data["data.${each.value}"]
 }
