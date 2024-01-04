@@ -6,7 +6,7 @@ metadata:
   namespace: portal
 
 spec:
-  releaseName: portal-app
+  releaseName: portal-gotenberg
   interval: 5m
   chart:
     spec:
