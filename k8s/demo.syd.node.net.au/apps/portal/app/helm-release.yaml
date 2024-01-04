@@ -74,7 +74,7 @@ spec:
         enabled: true
         type: persistentVolumeClaim
         size: 5Gi
-        accessMode: ReadWriteMany
+        accessMode: ReadWriteOnce
         retain: true
         advancedMounts:
           main:
