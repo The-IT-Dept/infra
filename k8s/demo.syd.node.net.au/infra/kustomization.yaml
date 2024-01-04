@@ -15,4 +15,4 @@ patchesJson6902:
     patch: |-
       - op: add
         path: /spec/template/spec/containers/0/args/-
-        value: "--txt-owner-id=staging.syd.node.net.au"
+        value: "--txt-owner-id=demo.syd.node.net.au"

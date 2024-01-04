@@ -2,7 +2,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: apps
+  name: infra
   namespace: flux-system
 spec:
   interval: 1m0s
@@ -10,12 +10,11 @@ spec:
     kind: GitRepository
     name: flux-system
   prune: true
-  path: ./k8s/staging.syd.node.net.au/apps
+  path: ./k8s/demo.syd.node.net.au/infra
   validation: client
 
   dependsOn:
     - name: base-sources
-    - name: infra
 
   decryption:
     provider: sops

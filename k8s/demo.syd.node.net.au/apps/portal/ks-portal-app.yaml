@@ -2,11 +2,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: apps-portal-postgres
+  name: apps-portal-app
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./k8s/staging.syd.node.net.au/apps/portal/postgres
+  dependsOn:
+    - name: apps-portal-postgres
+    - name: apps-portal-redis
+  path: ./k8s/demo.syd.node.net.au/apps/portal/app
   prune: true
   sourceRef:
     kind: GitRepository
