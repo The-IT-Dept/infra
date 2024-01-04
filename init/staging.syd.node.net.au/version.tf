@@ -38,7 +38,7 @@ terraform {
 }
 
 data "external" "env" {
-  program = ["${path.module}/../../env.sh"]
+  program = ["${path.module}/../env.sh"]
 }
 
 provider "github" {
