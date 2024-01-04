@@ -25,8 +25,8 @@ spec:
           database: portal
           existingSecret: portal-secrets
           secretKeys:
-            adminPasswordKey: POSTGRES_PASSWORD
-            userPasswordKey: POSTGRES_PASSWORD
+            adminPasswordKey: DB_PASSWORD
+            userPasswordKey: DB_PASSWORD
 
     primary:
       persistence:
