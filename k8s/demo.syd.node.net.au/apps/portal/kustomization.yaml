@@ -9,4 +9,4 @@ resources:
   - ks-portal-redis.yaml
   - ks-portal-postgres.yaml
   - ks-portal-gotenberg.yaml
-  # - ks-portal-app.yaml
+  - ks-portal-app.yaml

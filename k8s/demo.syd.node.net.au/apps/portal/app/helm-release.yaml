@@ -21,14 +21,15 @@ spec:
     defaultPodOptions:
       imagePullSecrets:
         - name: ghcr-secret
+
     controllers:
       main:
         strategy: RollingUpdate
         containers:
           main:
             image:
-              repository: getlago/front
-              tag: v0.50.0-beta
+              repository: ghcr.io/the-it-dept/node-isp-portal
+              tag: node-portal-v0.0.4
               pullPolicy: IfNotPresent
 
             env:
@@ -38,107 +39,13 @@ spec:
               - secretRef:
                   name: portal-secrets
 
-      api:
-        strategy: RollingUpdate
-        containers:
-          main:
-            image:
-              repository: ghcr.io/the-it-dept/lago-api
-              tag: v0.50.0-tid
-              pullPolicy: IfNotPresent
-
-            command: [ "./scripts/start.sh" ]
-
-            env:
-              TZ: Australia/Sydney
-
-            envFrom:
-              - secretRef:
-                  name: portal-secrets
-
-      pdf:
-        strategy: RollingUpdate
-        containers:
-          main:
-            image:
-              repository: getlago/lago-gotenberg
-              tag: 7
-              pullPolicy: IfNotPresent
-
-            env:
-              TZ: Australia/Sydney
-
-      clock:
-        strategy: RollingUpdate
-        containers:
-          main:
-            image:
-              repository: ghcr.io/the-it-dept/lago-api
-              tag: v0.50.0-tid
-              pullPolicy: IfNotPresent
-
-            command: [ "./scripts/start.clock.sh" ]
-
-            env:
-              TZ: Australia/Sydney
-
-            envFrom:
-              - secretRef:
-                  name: portal-secrets
-
-      event-worker:
-        strategy: RollingUpdate
-        containers:
-          main:
-            image:
-              repository: ghcr.io/the-it-dept/lago-api
-              tag: v0.50.0-tid
-              pullPolicy: IfNotPresent
-
-            command: [ "./scripts/start.events.worker.sh" ]
-
-            env:
-              TZ: Australia/Sydney
-
-            envFrom:
-              - secretRef:
-                  name: portal-secrets
-
-      worker:
-        strategy: RollingUpdate
-        containers:
-          main:
-            image:
-              repository: ghcr.io/the-it-dept/lago-api
-              tag: v0.50.0-tid
-              pullPolicy: IfNotPresent
-
-            command: [ "./scripts/start.worker.sh" ]
-
-            env:
-              TZ: Australia/Sydney
-
-            envFrom:
-              - secretRef:
-                  name: portal-secrets
 
     service:
       main:
         ports:
           http:
-            port: 80
+            port: 8000
 
-      api:
-        controller: api
-        ports:
-          http:
-            port: 3000
-
-      pdf:
-        controller: pdf
-        ports:
-          http:
-            port: 3000
 
     ingress:
       main:
@@ -149,7 +56,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
 
         hosts:
-          - host: &host "staging.node.net.au"
+          - host: &host "demo.node.net.au"
             paths:
               - path: /
                 pathType: Prefix
@@ -162,66 +69,15 @@ spec:
               - *host
             secretName: *host
 
-      api:
-        enabled: true
-        className: traefik
-
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-
-        hosts:
-          - host: &apiHost "staging.node.net.au"
-            paths:
-              - path: /api/
-                pathType: Prefix
-                service: &apiService
-                  name: api
-                  port: http
-
-              - path: /graphql
-                pathType: Prefix
-                service: *apiService
-
-              - path: /webhooks/
-                pathType: Prefix
-                service: *apiService
-
-              - path: /health
-                pathType: Prefix
-                service: *apiService
-
-              - path: /admin/
-                pathType: Prefix
-                service: *apiService
-
-              - path: /rails/
-                pathType: Prefix
-                service: *apiService
-
-        tls:
-          - hosts:
-              - *apiHost
-            secretName: *apiHost
-
     persistence:
       storage:
         enabled: true
         type: persistentVolumeClaim
-        size: 25Gi
+        size: 5Gi
         accessMode: ReadWriteMany
         retain: true
         advancedMounts:
-          api:
-            main:
-              - path: /app/storage
-                readOnly: false
-
-          event-worker:
-            main:
-              - path: /app/storage
-                readOnly: false
-
-          worker:
+          main:
             main:
               - path: /app/storage
                 readOnly: false
