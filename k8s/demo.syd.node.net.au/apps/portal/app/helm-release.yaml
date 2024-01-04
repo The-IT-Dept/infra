@@ -79,5 +79,5 @@ spec:
         advancedMounts:
           main:
             main:
-              - path: /app/storage
+              - path: /app/storage/app/public
                 readOnly: false
