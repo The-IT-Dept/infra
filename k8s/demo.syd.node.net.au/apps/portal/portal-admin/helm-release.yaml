@@ -2,11 +2,11 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: portal-app
+  name: portal-app-admin
   namespace: portal
 
 spec:
-  releaseName: portal-app
+  releaseName: portal-app-admin
   interval: 5m
   chart:
     spec:
@@ -29,16 +29,22 @@ spec:
           main:
             image:
               repository: ghcr.io/the-it-dept/node-isp-portal
-              tag: node-portal-v0.0.11
+              tag: v0.0.13
               pullPolicy: IfNotPresent
-
-            env:
-              TZ: Australia/Sydney
 
             envFrom:
               - secretRef:
                   name: portal-secrets
 
+            env:
+              TZ: Australia/Sydney
+              APP_ADMIN_PORTAL: true
+              APP_ADMIN_PORTAL_DOMAIN: &host  demo.node.net.au
+              APP_ADMIN_PORTAL_PATH: admin
+
+              APP_PROVIDER_PORTAL: true
+              APP_PROVIDER_PORTAL_DOMAIN: *host
+              APP_PROVIDER_PORTAL_PATH:
 
     service:
       main:
@@ -56,7 +62,7 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
 
         hosts:
-          - host: &host "demo.node.net.au"
+          - host: *host
             paths:
               - path: /
                 pathType: Prefix
