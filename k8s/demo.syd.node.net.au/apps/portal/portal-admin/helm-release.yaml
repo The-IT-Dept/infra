@@ -39,13 +39,16 @@ spec:
             env:
               TZ: Australia/Sydney
               APP_ADMIN_PORTAL: true
-              APP_ADMIN_PORTAL_DOMAIN: &host  demo.node.net.au
+              APP_ADMIN_PORTAL_DOMAIN: &host demo.node.net.au
               APP_ADMIN_PORTAL_PATH: admin
 
               APP_PROVIDER_PORTAL: true
               APP_PROVIDER_PORTAL_DOMAIN: *host
               APP_PROVIDER_PORTAL_PATH:
 
+              APP_CUSTOMER_PORTAL: true
+              APP_CUSTOMER_PORTAL_DOMAIN: &customer customer.demo.node.net.au
+              APP_CUSTOMER_PORTAL_PATH: 
     service:
       main:
         ports:
@@ -70,10 +73,21 @@ spec:
                   name: main
                   port: http
 
+          - host: *customer
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+
         tls:
           - hosts:
               - *host
             secretName: *host
+          - hosts:
+              - *customer
+            secretName: *customer
 
     persistence:
       storage:
