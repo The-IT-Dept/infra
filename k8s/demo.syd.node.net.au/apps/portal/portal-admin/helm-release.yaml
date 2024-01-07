@@ -47,7 +47,7 @@ spec:
               APP_PROVIDER_PORTAL_PATH:
 
               APP_CUSTOMER_PORTAL: true
-              APP_CUSTOMER_PORTAL_DOMAIN: &customer customer.demo.node.net.au
+              APP_CUSTOMER_PORTAL_DOMAIN: &customer customer-demo.node.net.au
               APP_CUSTOMER_PORTAL_PATH: 
     service:
       main:
