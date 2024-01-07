@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/the-it-dept/node-isp-portal
-              tag: portal-v0.0.14
+              tag: portal-v0.0.15
               pullPolicy: IfNotPresent
 
             envFrom:
