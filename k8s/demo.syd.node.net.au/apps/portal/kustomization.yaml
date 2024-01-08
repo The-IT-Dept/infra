@@ -10,3 +10,4 @@ resources:
   - ks-portal-postgres.yaml
   - ks-portal-gotenberg.yaml
   - ks-portal-admin.yaml
+  - ks-portal-radius.yaml
