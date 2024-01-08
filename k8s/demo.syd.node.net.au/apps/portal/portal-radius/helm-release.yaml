@@ -41,6 +41,8 @@ spec:
         type: LoadBalancer
         externalTrafficPolicy: Local
         ports:
+          http:
+            enabled: false
           acct:
             port: 1812
           auth:
