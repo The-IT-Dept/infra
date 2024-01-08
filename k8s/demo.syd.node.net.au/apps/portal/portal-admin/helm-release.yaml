@@ -28,7 +28,7 @@ spec:
         containers:
           main:
             image:
-              repository: ghcr.io/the-it-dept/node-isp-portal
+              repository: ghcr.io/the-it-dept/node-isp
               tag: portal-v0.0.18
               pullPolicy: IfNotPresent
 
