@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/the-it-dept/node-isp
-              tag: radius-v0.0.18
+              tag: radius-v0.0.19
               pullPolicy: IfNotPresent
 
             envFrom:
@@ -37,9 +37,28 @@ spec:
                   name: portal-secrets
         probes:
           liveness:
-            type: HTTP
-          readiness:
-            type: HTTP
+            enabled: true
+            custom: true
+            spec:
+              initialDelaySeconds: 30
+              periodSeconds: 10
+              timeoutSeconds: 1
+              failureThreshold: 3
+              httpGet:
+                path: /live
+                port: 8080
+
+            readiness:
+              enabled: true
+              custom: true
+              spec:
+                initialDelaySeconds: 30
+                periodSeconds: 10
+                timeoutSeconds: 1
+                failureThreshold: 3
+                httpGet:
+                  path: /ready
+                  port: 8080
 
     service:
       main:
