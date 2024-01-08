@@ -35,6 +35,11 @@ spec:
             envFrom:
               - secretRef:
                   name: portal-secrets
+        probes:
+          liveness:
+            type: HTTP
+          readiness:
+            type: HTTP
 
     service:
       main:
@@ -42,8 +47,10 @@ spec:
         externalTrafficPolicy: Local
         ports:
           http:
-            enabled: false
+            port: 8080
           acct:
             port: 1812
+            protocol: UDP
           auth:
             port: 1813
+            protocol: UDP
