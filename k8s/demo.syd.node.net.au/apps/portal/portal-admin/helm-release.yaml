@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/the-it-dept/node-isp
-              tag: portal-v0.0.19
+              tag: portal-v0.2.2
               pullPolicy: IfNotPresent
 
             envFrom:
@@ -39,15 +39,15 @@ spec:
             env:
               TZ: Australia/Sydney
               APP_ADMIN_PORTAL: true
-              APP_ADMIN_PORTAL_DOMAIN: &host demo.node.net.au
-              APP_ADMIN_PORTAL_PATH: admin
+              APP_ADMIN_PORTAL_DOMAIN: &admin demo-admin.node.net.au
+              APP_ADMIN_PORTAL_PATH:
 
               APP_PROVIDER_PORTAL: true
-              APP_PROVIDER_PORTAL_DOMAIN: *host
+              APP_PROVIDER_PORTAL_BASE_DOMAIN: &provider demo.node.net.au
               APP_PROVIDER_PORTAL_PATH:
 
               APP_CUSTOMER_PORTAL: true
-              APP_CUSTOMER_PORTAL_DOMAIN: &customer customer-demo.node.net.au
+              APP_CUSTOMER_PORTAL_DOMAIN: &customer demo-customer.node.net.au
               APP_CUSTOMER_PORTAL_PATH:
     service:
       main:
@@ -65,7 +65,15 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
 
         hosts:
-          - host: *host
+          - host: *admin
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  name: main
+                  port: http
+
+          - host: *provider
             paths:
               - path: /
                 pathType: Prefix
@@ -83,8 +91,13 @@ spec:
 
         tls:
           - hosts:
-              - *host
-            secretName: *host
+              - *admin
+            secretName: *admin
+
+          - hosts:
+              - *provider
+            secretName: *provider
+
           - hosts:
               - *customer
             secretName: *customer

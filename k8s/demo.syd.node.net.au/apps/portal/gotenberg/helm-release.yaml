@@ -31,7 +31,6 @@ spec:
             env:
               TZ: Australia/Sydney
 
-
     service:
       main:
         ports:
