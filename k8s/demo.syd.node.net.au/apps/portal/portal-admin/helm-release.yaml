@@ -43,7 +43,8 @@ spec:
               APP_ADMIN_PORTAL_PATH:
 
               APP_PROVIDER_PORTAL: true
-              APP_PROVIDER_PORTAL_BASE_DOMAIN: &provider demo.node.net.au
+              APP_PROVIDER_PORTAL_DOMAIN: &provider demo.node.net.au
+              APP_PROVIDER_PORTAL_TENANT_DOMAIN: node.net.au
               APP_PROVIDER_PORTAL_PATH:
 
               APP_CUSTOMER_PORTAL: true
