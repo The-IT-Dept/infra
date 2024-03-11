@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./k8s/demo.syd.node.net.au/base
+  path: ./k8s/demo.node.net.au/base
   prune: true
   sourceRef:
     kind: GitRepository

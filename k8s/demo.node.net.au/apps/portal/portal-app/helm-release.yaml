@@ -43,8 +43,7 @@ spec:
               APP_ADMIN_PORTAL_PATH:
 
               APP_PROVIDER_PORTAL: true
-              APP_PROVIDER_PORTAL_DOMAIN: &provider demo.node.net.au
-              APP_PROVIDER_PORTAL_TENANT_DOMAIN: node.net.au
+              APP_PROVIDER_PORTAL_BASE_DOMAIN: &provider demo.node.net.au
               APP_PROVIDER_PORTAL_PATH:
 
               APP_CUSTOMER_PORTAL: true
@@ -60,7 +59,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: traefik
+        className: nginx
 
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
@@ -90,22 +89,6 @@ spec:
                   name: main
                   port: http
 
-          - host: demo-provider.node.net.au
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: main
-                  port: http
-
-          - host: provider.demo.node.net.au
-            paths:
-              - path: /
-                pathType: Prefix
-                service:
-                  name: main
-                  port: http
-
         tls:
           - hosts:
               - *admin
@@ -118,14 +101,6 @@ spec:
           - hosts:
               - *customer
             secretName: *customer
-
-          - hosts:
-              - demo-provider.node.net.au
-            secretName: demo-provider.node.net.au
-
-          - hosts:
-              - provider.demo.node.net.au
-            secretName: provider.demo.node.net.au
 
     persistence:
       storage:

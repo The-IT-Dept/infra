@@ -10,7 +10,7 @@ spec:
     kind: GitRepository
     name: flux-system
   prune: true
-  path: ./k8s/demo.syd.node.net.au/apps
+  path: ./k8s/demo.node.net.au/apps
   validation: client
 
   dependsOn:
