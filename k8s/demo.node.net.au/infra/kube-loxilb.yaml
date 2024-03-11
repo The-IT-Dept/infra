@@ -109,7 +109,7 @@ spec:
           args:
             - '--externalCIDR=157.20.112.8/29'
             - '--externalCIDR6=2001:df3:80c0::1:0/112'
-            - '--v 100'
+            - '--v=100'
           #- --externalSecondaryCIDRs=124.124.124.1/24,125.125.125.1/24
           #- --monitor
           #- --setBGP=64512
