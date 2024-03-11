@@ -6,17 +6,18 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
+
+  prune: true
+  path: ./k8s/demo.node.net.au/infra
+
   sourceRef:
     kind: GitRepository
     name: flux-system
-  prune: true
-  path: ./k8s/demo.node.net.au/infra
-  validation: client
-
-  dependsOn:
-    - name: base-sources
 
   decryption:
     provider: sops
     secretRef:
       name: sops-age
+
+  dependsOn:
+    - name: base-sources

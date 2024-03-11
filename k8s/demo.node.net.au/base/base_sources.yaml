@@ -6,9 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
+  path: ./k8s/base/sources
+  prune: true
+
   sourceRef:
     kind: GitRepository
     name: flux-system
-  prune: true
-  path: ./k8s/base/sources
-  validation: client
