@@ -18,12 +18,8 @@ spec:
       interval: 5m
   values:
     controller:
-      replicaCount: 1
-      service:
-        type: LoadBalancer
-
-      publishService:
-        enabled: true
+      kind: DaemonSet
+      hostNetwork: true
 
       config:
         enable-real-ip: true
