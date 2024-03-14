@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./k8s/demo.syd.node.net.au/apps/portal/postgres
+  path: ./k8s/demo.node.net.au/apps/portal/postgres
   prune: true
   sourceRef:
     kind: GitRepository

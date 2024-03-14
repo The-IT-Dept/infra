@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - name: apps-portal-postgres
     - name: apps-portal-redis
-  path: ./k8s/demo.syd.node.net.au/apps/portal/portal-radius
+  path: ./k8s/demo.node.net.au/apps/portal/portal-radius
   prune: true
   sourceRef:
     kind: GitRepository
