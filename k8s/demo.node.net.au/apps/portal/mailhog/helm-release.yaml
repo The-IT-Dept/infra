@@ -52,13 +52,18 @@ spec:
           cert-manager.io/cluster-issuer: letsencrypt-production
 
         hosts:
-          - host: demo-mail.node.net.au
+          - host: &host demo-mail.node.net.au
             paths:
               - path: /
                 pathType: Prefix
                 service:
                   name: main
                   port: http
+
+        tls:
+          - hosts:
+              - *host
+            secretName: *host
 
     persistence:
       storage:
