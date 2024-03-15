@@ -18,43 +18,107 @@ spec:
         namespace: flux-system
 
   values:
+    image:
+      repository: &repository ghcr.io/the-it-dept/node-isp
+      tag: &tag portal-v0.3.5
+
     defaultPodOptions:
       imagePullSecrets:
         - name: ghcr-secret
+
+    global:
+      portal_backend: &portal-backend
+        image:
+          repository: *repository
+          tag: *tag
+          pullPolicy: IfNotPresent
+
+          envFrom:
+            - secretRef:
+                name: portal-secrets
+
+          env:
+            APP_VERSION: *tag
+            SERVER_NAME: :8080
+
+            TZ: Australia/Sydney
+
+            APP_ADMIN_PORTAL: true
+            APP_ADMIN_PORTAL_DOMAIN: &admin demo-admin.node.net.au
+            APP_ADMIN_PORTAL_PATH:
+
+            APP_PROVIDER_PORTAL: true
+            APP_PROVIDER_PORTAL_BASE_DOMAIN: &provider demo.node.net.au
+            APP_PROVIDER_PORTAL_PATH:
+
+            APP_CUSTOMER_PORTAL: true
+            APP_CUSTOMER_PORTAL_DOMAIN: &customer demo-customer.node.net.au
+            APP_CUSTOMER_PORTAL_PATH:
 
     controllers:
       main:
         strategy: RollingUpdate
         containers:
           main:
-            image:
-              repository: ghcr.io/the-it-dept/node-isp
-              tag: portal-v0.3.5
-              pullPolicy: IfNotPresent
+            <<: *portal-backend
 
-            envFrom:
-              - secretRef:
-                  name: portal-secrets
+            # Move back to Octane once it's stable
+            # command:
+            #   - "php"
+            #   - "artisan"
+            #   - "octane:start"
+            command:
+              - frankenphp
+              - run
+              - --config
+              - /etc/caddy/Caddyfile
 
-            env:
-              TZ: Australia/Sydney
-              APP_ADMIN_PORTAL: true
-              APP_ADMIN_PORTAL_DOMAIN: &admin demo-admin.node.net.au
-              APP_ADMIN_PORTAL_PATH:
+        initContainers: &initContainers
+          migrate:
+            <<: *portal-backend
+            command:
+              - "php"
+              - "artisan"
+              - "migrate"
+              - "--force"
+              - "--isolated"
 
-              APP_PROVIDER_PORTAL: true
-              APP_PROVIDER_PORTAL_BASE_DOMAIN: &provider demo.node.net.au
-              APP_PROVIDER_PORTAL_PATH:
+      schedule:
+        enabled: true
+        type: cronjob
+        cronjob:
+          schedule: "*/1 * * * *"
+          startingDeadlineSeconds: 30
+          backoffLimit: 1
+          concurrencyPolicy: Forbid
+        containers:
+          main:
+            <<: *portal-backend
+            command:
+              - "php"
+              - "artisan"
+              - "schedule:run"
 
-              APP_CUSTOMER_PORTAL: true
-              APP_CUSTOMER_PORTAL_DOMAIN: &customer demo-customer.node.net.au
-              APP_CUSTOMER_PORTAL_PATH:
+        initContainers: *initContainers
+
+      worker:
+        enabled: true
+        type: deployment
+        containers:
+          main:
+            <<: *portal-backend
+            command:
+              - "php"
+              - "artisan"
+              - "horizon"
+
+        initContainers: *initContainers
+
     service:
       main:
         ports:
           http:
             port: 8080
-
 
     ingress:
       main:
