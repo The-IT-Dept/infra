@@ -34,11 +34,10 @@ spec:
               name: portal-secrets
 
         env:
+          TZ: Australia/Sydney
+
           APP_VERSION: *tag
           SERVER_NAME: :8080
-          OCTANE_HTTPS: "true"
-
-          TZ: Australia/Sydney
 
           APP_ADMIN_PORTAL: true
           APP_ADMIN_PORTAL_DOMAIN: &admin demo-admin.node.net.au
