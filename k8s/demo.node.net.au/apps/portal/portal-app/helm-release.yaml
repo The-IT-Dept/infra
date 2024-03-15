@@ -51,6 +51,8 @@ spec:
           APP_CUSTOMER_PORTAL_DOMAIN: &customer demo-customer.node.net.au
           APP_CUSTOMER_PORTAL_PATH:
 
+          CONFIG_HASH: "1"
+
     defaultPodOptions:
       imagePullSecrets:
         - name: ghcr-secret
