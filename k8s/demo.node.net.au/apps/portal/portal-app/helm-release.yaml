@@ -2,11 +2,11 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: portal-app-admin
+  name: portal-app
   namespace: portal
 
 spec:
-  releaseName: portal-app-admin
+  releaseName: portal-app
   interval: 5m
   chart:
     spec:
@@ -29,7 +29,7 @@ spec:
           main:
             image:
               repository: ghcr.io/the-it-dept/node-isp
-              tag: portal-v0.2.4
+              tag: portal-v0.3.5
               pullPolicy: IfNotPresent
 
             envFrom:
