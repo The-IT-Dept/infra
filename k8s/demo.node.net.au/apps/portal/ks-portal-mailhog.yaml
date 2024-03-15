@@ -2,11 +2,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: apps-portal-redis
+  name: apps-portal-mailhog
   namespace: flux-system
 spec:
   interval: 1m
-  path: ./k8s/demo.node.net.au/apps/portal/redis
+  path: ./k8s/demo.node.net.au/apps/portal/mailhog
   prune: true
   sourceRef:
     kind: GitRepository
