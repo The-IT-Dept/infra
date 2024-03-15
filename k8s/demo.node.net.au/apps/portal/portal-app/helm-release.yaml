@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: &repository ghcr.io/the-it-dept/node-isp
-      tag: &tag portal-v0.3.5
+      tag: &tag portal-v0.3.6
 
     global:
       portal_backend: &portal-backend
@@ -36,6 +36,7 @@ spec:
         env:
           APP_VERSION: *tag
           SERVER_NAME: :8080
+          OCTANE_HTTPS: "true"
 
           TZ: Australia/Sydney
 
