@@ -59,3 +59,16 @@ spec:
                 service:
                   name: main
                   port: http
+
+    persistence:
+      storage:
+        enabled: true
+        type: persistentVolumeClaim
+        size: 5Gi
+        accessMode: ReadWriteOnce
+        retain: true
+        advancedMounts:
+          main:
+            main:
+              - path: /data
+                readOnly: false
