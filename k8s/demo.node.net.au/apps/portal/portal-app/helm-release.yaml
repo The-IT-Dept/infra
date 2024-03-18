@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: &repository ghcr.io/the-it-dept/node-isp
-      tag: &tag portal-v0.5.1
+      tag: &tag portal-v0.5.2
 
     global:
       portal_backend: &portal-backend
@@ -69,11 +69,11 @@ spec:
             #   - "php"
             #   - "artisan"
             #   - "octane:start"
-            command:
-              - frankenphp
-              - run
-              - --config
-              - /etc/caddy/Caddyfile
+            # command:
+            #  - frankenphp
+            #  - run
+            #  - --config
+            #  - /etc/caddy/Caddyfile
 
         initContainers: &initContainers
           migrate:
