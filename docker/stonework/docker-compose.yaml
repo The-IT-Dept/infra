@@ -1,0 +1,31 @@
+version: '3.3'
+
+volumes:                                    # new
+  runtime_data: {}                          # new
+
+services:
+  stonework:
+    container_name: stonework
+    image: "ghcr.io/pantheontech/stonework:23.06"
+    privileged: true
+    network_mode: "host"
+    environment:
+      INITIAL_LOGLVL: "debug"               # new
+      MICROSERVICE_LABEL: "stonework"       # new
+      ETCD_CONFIG: ""
+    volumes:
+      - runtime_data:/run/stonework         # new
+
+  bgp:                                      # new whole bgp service
+    container_name: bgp
+    image: "ghcr.io/pantheontech/cnf-bgp:22.10"
+    depends_on:
+      - stonework
+    privileged: true
+    environment:
+      CNF_MODE: "STONEWORK_MODULE"
+      INITIAL_LOGLVL: "debug"
+      MICROSERVICE_LABEL: "bgp"
+      ETCD_CONFIG: ""
+    volumes:
+      - runtime_data:/run/stonework
