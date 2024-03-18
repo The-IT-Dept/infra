@@ -20,7 +20,7 @@ spec:
   values:
     image:
       repository: &repository ghcr.io/the-it-dept/node-isp
-      tag: &tag portal-v0.5.3
+      tag: &tag portal-v0.5.4
 
     global:
       portal_backend: &portal-backend
